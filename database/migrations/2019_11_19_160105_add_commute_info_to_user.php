@@ -16,8 +16,8 @@ class AddCommuteInfoToUser extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->double('lattitude', 9,6);
             $table->double('longtitude', 9,6);
-            $table->string('fuel_type', 10).nullable();
-            $table->double('fuel_consumption', 5,2).nullable();
+            $table->string('fuel_type', 10)->nullable();
+            $table->double('fuel_consumption', 5,2)->nullable();
         });
     }
 

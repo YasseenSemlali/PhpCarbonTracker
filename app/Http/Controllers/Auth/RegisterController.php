@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+use App\Repositories\HereRepository;
+
 class RegisterController extends Controller
 {
     /*
@@ -29,15 +31,18 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    
+    protected $here;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(HereRepository $here)
     {
         $this->middleware('guest');
+        $this->here = $here;
     }
 
     /**
@@ -52,6 +57,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'address' => ['required', 'string'],
         ]);
     }
 
@@ -63,10 +69,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $location = $this->here->getLattitudeLongitude($data['address']);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'lattitude' => $location[0],
+            'longtitude' => $location[1],
         ]);
     }
 }

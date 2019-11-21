@@ -78,19 +78,25 @@
                             <label for="Transportation" class="col-md-4 col-form-label text-md-right">{{ __('Transportation Mode') }}</label>
                         
                             <div class="col-md-6">
-                                <!--<input id="Transportation" type="text" class="form-control @error('Transportation') is-invalid @enderror" name="accreditation" value="{{ old('accreditation') }}" required autocomplete="accreditation">-->
-                        
-                                <!--@error('Transportation')-->
-                                <!--    <span class="invalid-feedback" role="alert">-->
-                                <!--        <strong>{{ $message }}</strong>-->
-                                <!--    </span>-->
-                                <!--@enderror-->
-                                
                                 <select>
                                   <option value="car">Car</option>
                                   <option value="bike">Bike</option>
                                   <option value="walk">Walk</option>
                                  <option value="publicTransport">Public Transport</option>
+                                </select>
+                                                                
+                            </div>
+                        </div> 
+                        
+                     <div class="form-group row">
+                            <label for="fuelType" class="col-md-4 col-form-label text-md-right">Fuel Type</label>
+                        
+                            <div class="col-md-6">
+                                <select>
+                                    <option value="none">Not Applicable</option>
+                                  <option value="diesel">Diesel</option>
+                                  <option value="gasoline">Gasoline</option>
+                                  <option value="electric">Electric</option>
                                 </select>
                                                                 
                             </div>

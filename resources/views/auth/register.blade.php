@@ -74,26 +74,13 @@
                                 @enderror
                             </div>
                         </div> 
-                      <div class="form-group row">
-                            <label for="Transportation" class="col-md-4 col-form-label text-md-right">{{ __('Transportation Mode') }}</label>
-                        
-                            <div class="col-md-6">
-                                <select>
-                                  <option value="car">Car</option>
-                                  <option value="bike">Bike</option>
-                                  <option value="walk">Walk</option>
-                                 <option value="publicTransport">Public Transport</option>
-                                </select>
-                                                                
-                            </div>
-                        </div> 
-                        
+
                      <div class="form-group row">
-                            <label for="fuelType" class="col-md-4 col-form-label text-md-right">Fuel Type</label>
+                            <label for="fuel_type" class="col-md-4 col-form-label text-md-right">{{ __('Fuel Type') }}</label>
                         
                             <div class="col-md-6">
                                 <select>
-                                    <option value="none">Not Applicable</option>
+                                   <option value= "{{ __('none')}}">Not Applicable</option>
                                   <option value="diesel">Diesel</option>
                                   <option value="gasoline">Gasoline</option>
                                   <option value="electric">Electric</option>
@@ -101,6 +88,21 @@
                                                                 
                             </div>
                         </div> 
+                        
+                         <div class="form-group row">
+                            <label for="consumption" class="col-md-4 col-form-label text-md-right">Average Consumption (L/100km)</label>
+                        
+                            <div class="col-md-6">
+                                <input id="consumptionTxt" type="text" class="form-control @error('consumption') is-invalid @enderror" name="consumption" value="{{ old('consumption') }}" required autocomplete="consumption">
+                        
+                                @error('consumption')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div> 
+                        
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

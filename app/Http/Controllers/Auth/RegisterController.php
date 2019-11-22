@@ -74,12 +74,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-//
-         //   'lattitude' => $data['lattitude'],
-         //   'longtitude' => $data['longtitude'],
             'fuel_type' => $data['fuel_type'],
             'fuel_consumption' => $data['fuel_consumption'],
-//new changes ys
             'lattitude' => $location[0],
             'longtitude' => $location[1],
         ]);

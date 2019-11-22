@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Repositories\TripRepository;
 use App\Repositories\HereRepository;
-
 use Illuminate\Http\Request;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -33,8 +33,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //$user = User::
+        
         return view('home.index', [
             //'test'=>$this->here->getTrip('1445 Guy St, Montreal, Quebec H3H 2L5', '358 Sainte-Catherine', 'car', 'diesel', 12)
+            'username' => "John DOE",
+            'dateStarted' => 'Date xxxx',
+            'totalDistance' => '30 km',
+            'emissionAmount' => 'AMount Here ',
+            'cost' => 'Cost offset Here '
             ]);
     }
     

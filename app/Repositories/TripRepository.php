@@ -1,11 +1,15 @@
 <?php 
     namespace App\Repositories;
+    use Illuminate\Support\Facades\Auth;
 
     use App\Trip;
 
     class TripRepository {
-        public function getAllTrips(int $id) {
-            return 'test';
+        
+        //tempoprary, make it take id as param later
+        public function getAllTrips() {
+            $test = Auth::user()->trips->toArray();
+            
         }
         
         public function addTrip(int $id) {

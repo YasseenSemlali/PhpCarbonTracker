@@ -50,7 +50,7 @@
             if(isset( $contents['response']['route'][0]['summary']['co2Emission'])) {
                 $result['co2Emission'] =  $contents['response']['route'][0]['summary']['co2Emission'];
             }
-            var_dump($result);
+            
             return $result;
         }
     }

@@ -30,7 +30,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('home', [
-            'test'=>$this->here->getTrip('1445 Guy St, Montreal, Quebec H3H 2L5', '358 Sainte-Catherine', 'car', 'diesel', 12)
+            //'test'=>$this->here->getTrip('1445 Guy St, Montreal, Quebec H3H 2L5', '358 Sainte-Catherine', 'car', 'diesel', 12)
             ]);
     }
 }

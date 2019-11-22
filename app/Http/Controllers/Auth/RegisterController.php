@@ -69,7 +69,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $location = $this->here->getLattitudeLongitude($data['address']);
+        $location = $this->here->getLatitudeLongitude($data['address']);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -78,6 +78,7 @@ class RegisterController extends Controller
             'fuel_consumption' => $data['fuel_consumption'],
             'lattitude' => $location[0],
             'longtitude' => $location[1],
+
         ]);
     }
 }

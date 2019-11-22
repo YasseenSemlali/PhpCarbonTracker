@@ -5,5 +5,9 @@
         public function getAllTrips(int $id) {
             return 'test';
         }
+        
+        public function addTrip(int $id) {
+            
+        }
     }
 ?>

@@ -9,11 +9,10 @@
             
             $contents = json_decode(file_get_contents($url), true);
 
-            //echo "<pre>"; print_r($contents); echo "</pre>";
             if(count($contents['Response']['View']) == 0) {
                 return [];   
             }
-            
+            //echo "<pre>"; print_r($contents); echo "</pre>";
 
             $latitude = $contents['Response']['View'][0]['Result'][0]['Location']['DisplayPosition']['Latitude'];
             $longitude = $contents['Response']['View'][0]['Result'][0]['Location']['DisplayPosition']['Longitude'];
@@ -51,9 +50,8 @@
             if(isset( $contents['response']['route'][0]['summary']['co2Emission'])) {
                 $result['co2Emission'] =  $contents['response']['route'][0]['summary']['co2Emission'];
             }
-            
-           
-                var_dump($result);
+            var_dump($result);
+            return $result;
         }
     }
 ?>

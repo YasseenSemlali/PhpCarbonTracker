@@ -1,5 +1,6 @@
 <?php
     namespace App\Repositories;
+    //https://developer.here.com/documentation/routing/dev_guide/topics/resource-param-type-vehicle-type.html
     class HereRepository {
         static $app_id = 'Nq8Tkg61stTaV5gAT5jv';
         static $app_code = 'aI_Q8jPEQgQxojt0rJrJiA';
@@ -23,14 +24,14 @@
                 ];
         }
         
-        public function getTrip(string $startAddress, string $endAddress, string $transportType, string $fuelType = null, float $fuelConsumption = null) {
-            $startResult = $this->getLatitudeLongitude($startAddress);
-            $startLatitude = $startResult['latitude'];
-            $startLongitude = $startResult['longtitude'];
+        public function getTrip(float $startLatitude, float $startLongitude,float $endLatitude,float $endLongtitude, string $transportType, string $fuelType = null, float $fuelConsumption = null) {
+            // $startResult = $this->getLatitudeLongitude($startAddress);
+            // $startLatitude = $startResult['latitude'];
+            // $startLongitude = $startResult['longtitude'];
             
-            $endResult = $this->getLatitudeLongitude($endAddress);
-            $endLatitude = $endResult['latitude'];
-            $endLongtitude = $endResult['longtitude'];
+            // $endResult = $this->getLatitudeLongitude($endAddress);
+            // $endLatitude = $endResult['latitude'];
+            // $endLongtitude = $endResult['longtitude'];
             
             $mode='fastest';
             $traffic = 'enabled';

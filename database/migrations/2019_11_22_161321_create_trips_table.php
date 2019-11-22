@@ -17,6 +17,11 @@ class CreateTripsTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+              ->references('id')->on('users')
+              ->onDelete('cascade');
+            
             $table->double('start_lattitude', 9,6);
             $table->double('start_longtitude', 9,6);
             $table->double('end_lattitude', 9,6);
@@ -38,6 +43,7 @@ class CreateTripsTable extends Migration
      */
     public function down()
     {
+        
         Schema::dropIfExists('trips');
     }
 }

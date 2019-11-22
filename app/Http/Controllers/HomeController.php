@@ -4,18 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Repositories\TripRepository;
 use App\Repositories\HereRepository;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     protected $trip;
     
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
+
     public function __construct(TripRepository $trip, HereRepository $here)
+
     {
         $this->trip = $trip;
         $this->here = $here;
@@ -29,8 +33,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', [
+        return view('home.index', [
             //'test'=>$this->here->getTrip('1445 Guy St, Montreal, Quebec H3H 2L5', '358 Sainte-Catherine', 'car', 'diesel', 12)
             ]);
     }
+    
 }

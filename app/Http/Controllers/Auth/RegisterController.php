@@ -69,13 +69,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $location = $this->here->getLattitudeLongitude($data['address']);
+        $location = $this->here->getLatitudeLongitude($data['address']);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'lattitude' => $location[0],
-            'longtitude' => $location[1],
+            'lattitude' => $location['latitude'],
+            'longtitude' => $location['longtitude'],
         ]);
     }
 }

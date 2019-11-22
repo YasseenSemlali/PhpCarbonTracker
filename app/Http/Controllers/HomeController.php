@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\TripRepository;
+use App\Repositories\HereRepository;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,9 +15,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(TripRepository $weather)
+    public function __construct(TripRepository $trip, HereRepository $here)
     {
-        $this->trip = $weather;
+        $this->trip = $trip;
+        $this->here = $here;
         $this->middleware('auth');
     }
 
@@ -28,7 +30,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('home', [
-            
+            'test'=>$this->here->getTrip('1445 Guy St, Montreal, Quebec H3H 2L5', '358 Sainte-Catherine', 'car', 'diesel', 12)
             ]);
     }
 }

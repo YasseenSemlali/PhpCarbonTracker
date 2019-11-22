@@ -62,12 +62,12 @@
                         </div>
                         
                         <div class="form-group row">
-                            <label for="Address" class="col-md-4 col-form-label text-md-right">{{ __('Home Address') }}</label>
+                            <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Home Address') }}</label>
                         
                             <div class="col-md-6">
-                                <input id="Address" type="text" class="form-control @error('Address') is-invalid @enderror" name="Address" value="{{ old('Address') }}" required autocomplete="Address">
+                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address">
                         
-                                @error('Address')
+                                @error('address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -79,7 +79,7 @@
                             <label for="fuel_type" class="col-md-4 col-form-label text-md-right">{{ __('Fuel Type') }}</label>
                         
                             <div class="col-md-6">
-                                <select>
+                                <select name = 'fuel_type'>
                                    <option value= "{{ __('none')}}">Not Applicable</option>
                                   <option value="diesel">Diesel</option>
                                   <option value="gasoline">Gasoline</option>
@@ -90,10 +90,10 @@
                         </div> 
                         
                          <div class="form-group row">
-                            <label for="consumption" class="col-md-4 col-form-label text-md-right">Average Consumption (L/100km)</label>
+                            <label for="fuel_consumption" class="col-md-4 col-form-label text-md-right">Average Consumption (L/100km)</label>
                         
                             <div class="col-md-6">
-                                <input id="consumptionTxt" type="text" class="form-control @error('consumption') is-invalid @enderror" name="consumption" value="{{ old('consumption') }}" required autocomplete="consumption">
+                                <input id="fuel_consumption" type="text" class="form-control @error('fuel_consumption') is-invalid @enderror" name="fuel_consumption" value="{{ old('fuel_consumption') }}" required autocomplete="fuel_consumption">
                         
                                 @error('consumption')
                                     <span class="invalid-feedback" role="alert">

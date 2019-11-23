@@ -12,11 +12,10 @@
 			@if (Auth::check())
 				<div class="panel panel-default">
 				     <label  class="col-md-4 col-form-label text-md-right">{{$username}}</label>
-				      <label  class="col-md-4 col-form-label text-md-right">Date Started {{$dateStarted}}</label>
-				       <label  class="col-md-4 col-form-label text-md-right">Total Distance In Commute {{$dateStarted}}</label>
-				       <label  class="col-md-4 col-form-label text-md-right">Amount of CO2 emissions {{$dateStarted}}</label>
-				         <label  class="col-md-4 col-form-label text-md-right">Cost To Offset your Emission {{$dateStarted}}</label>
-				       <label  class="col-md-4 col-form-label text-md-right">Date Started {{$dateStarted}}</label>
+				      <label  class="">Date Started {{$dateStarted}}</label>
+				       <label  class="">Total Distance In Commute {{$totalDistance}}</label>
+				       <label  class="">Amount of CO2 emissions {{$emissionAmount}}</label>
+				         <label  class="">Cost To Offset your Emission {{$cost}}</label>
 				     
 					<div class="panel-heading">
 					 	<h4>Plan A Trip</h4>
@@ -34,8 +33,8 @@
 			  
                     <label  class="col-md-4 col-form-label text-md-right">Starting Position</label>
                           <input type="text" name="other" >
-                                <select name = 'start'>
-                                       <option value="none"></option>
+                                <select name = 'start'>                                                                                                                                                                                                                                                                                                               
+                                  <option value="none"></option>
                                   <option value="Dawson">Dawson</option>
                                   <option value="Home">Home</option>
                                   <option value="house">FriendHouse</option>

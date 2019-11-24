@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\TripRepository;
 use App\Repositories\HereRepository;
 use Illuminate\Http\Request;
-use App\User;
+use App\Trip;
 
 class HomeController extends Controller
 {
@@ -33,10 +33,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //$user = User::
+        $trips = Trip::orderBy('created_at','DESC')->paginate(5);
         
         return view('home.index', [
-            //'test'=>$this->here->getTrip('1445 Guy St, Montreal, Quebec H3H 2L5', '358 Sainte-Catherine', 'car', 'diesel', 12)
+            'trips' => $trips,
             'username' => "John DOE",
             'dateStarted' => 'Date xxxx',
             'totalDistance' => '30 km',

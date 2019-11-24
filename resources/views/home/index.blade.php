@@ -11,7 +11,7 @@
 			<!-- Display this panel only if the user is authenticated -->
 			@if (Auth::check())
 				<div class="panel panel-default">
-				     <label  class="col-md-4 col-form-label text-md-right">{{$username}}</label>
+				     <label  class="">{{$username}}</label>
 				      <label  class="">Date Started {{$dateStarted}}</label>
 				       <label  class="">Total Distance In Commute {{$totalDistance}}</label>
 				       <label  class="">Amount of CO2 emissions {{$emissionAmount}}</label>
@@ -64,7 +64,52 @@
                      </div>                                     
                </div> 
 			@endif
+			
+			<!-- All Trips with pagination-->
+			@if (count($trips) > 0)
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						All trips
+					</div>
 
+					<div class="panel-body">
+						<table class="table table-striped task-table">
+							<thead>
+								<th>Recent Trips</th>
+								<th>&nbsp;</th>
+							</thead>
+							<tbody>
+								@foreach ($trips as $trip)
+									<tr>
+										<td class="table-text"><strong>Transport Mode</strong>
+											{{ $trip->mode }}</td>
+						
+										<td class="table-text"><strong>Engine </strong>
+											{{ $trip->engine }}</td>
+											
+								    	<td class="table-text"><strong>Distance Travelled </strong>
+											{{ $trip->distance }} Km</td>
+											
+										<td class="table-text"><strong>Trip Date </strong>
+											{{ $trip->created_at }}</td>
+										
+										<td class="table-text"><strong>Travel Time </strong>
+											{{ $trip->travelTime }}</td>
+											
+										<td class="table-text"><strong>CO2 Emitted </strong>
+											{{ $trip->co2emissions }}</td>
+											
+									</tr>
+									
+								@endforeach
+							</tbody>
+						</table>
+						{!! $trips->render() !!}
+					</div>
+				</div>
+			@endif
+
+            
 		</div>
 	</div>
 @endsection

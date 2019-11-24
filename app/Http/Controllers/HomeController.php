@@ -45,4 +45,26 @@ class HomeController extends Controller
             ]);
     }
     
+    
+    public function addTrip(Request $request){
+        
+        $hereRepo = new HereRepository();
+        $origin = $hereRepo->getLatitudeLongitude($request->origin);
+        $destination = $hereRepo->getLatitudeLongitude($request->destinationTxt);
+       echo $destination[0];
+        $tripInfo = $hereRepo->getTrip($origin[0],$origin[1],$destination[0],$destination[1],$request->transportationMode);
+        //validate here if necessary
+        $request->user()->trips()->create([
+                    'start_lattitude' =>$origin[0],
+                    'start_longtitude' => $origin[1],
+                    'end_lattitude' => $destination[0],
+                    'end_longtitude' => $destination[1],
+                    'mode' =>$request->mode,
+                    'engine' => 'diesel',
+                    'travelTime' =>634,
+                    'distance' => 1345,
+                    'co2emissions' => 0.385
+            ]);
+    }
+    
 }

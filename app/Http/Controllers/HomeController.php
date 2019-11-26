@@ -72,7 +72,15 @@ class HomeController extends Controller
                     'distance' => 1345,
                     'co2emissions' => 1.3,
             //'test'=>$this->here->getTrip('1445 Guy St, Montreal, Quebec H3H 2L5', '358 Sainte-Catherine', 'car', 'diesel', 12)
-            'test2'=>$this->trip->getAllTrips(5)
+
+        // $first = $this->here->getLatitudeLongitude('1445 Guy St, Montreal, Quebec H3H 2L5');
+        // $second = $this->here->getLatitudeLongitude('358 Sainte-Catherine');
+        
+        // $this->trip->addTrip($first['latitude'], $first['longtitude'], $second['latitude'], $second['longtitude'], 'car', 'diesel', 12);
+        // return view('home.index', [
+        //     //'test'=>$this->here->getTrip($first['latitude'], $first['longtitude'], $second['latitude'], $second['longtitude'], 'car', 'diesel', 12),
+
+        //     'test2'=>$this->trip->getAllTrips(5)
             ]);
     }
 

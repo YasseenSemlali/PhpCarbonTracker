@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Trip;
 use App\User;
+use App\Locations;
 
 
 class HomeController extends Controller
@@ -41,6 +42,7 @@ class HomeController extends Controller
 
         $trips = Trip::orderBy('created_at','DESC')->paginate(5);
         $user = Auth::user();
+        $recentLocations = 
         $totalDistance = $this->trip->totalDistance();
          $co2sum =  $this->trip->totalCO2();
         $offset = $this->trip->totalCostToOffsetCO2();
@@ -52,7 +54,7 @@ class HomeController extends Controller
             'totalDistance' => $totalDistance,
             'emissionAmount' => $co2sum,
             'cost' =>$offset,
-            'locations' =>$recentLocations;
+            'locations' =>$recentLocations
 
             ]);
     }

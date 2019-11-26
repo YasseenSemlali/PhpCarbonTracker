@@ -11,11 +11,11 @@
 			<!-- Display this panel only if the user is authenticated -->
 			@if (Auth::check())
 				<div class="panel panel-default">
-				     <label  class="">{{$username}}</label>
-				      <label  class="">Date Started {{$dateStarted}}</label>
-				       <label  class="">Total Distance In Commute {{$totalDistance}}</label>
-				       <label  class="">Amount of CO2 emissions {{$emissionAmount}}</label>
-				         <label  class="">Cost To Offset your Emission {{$cost}}</label>
+				     <label  class="">Welcome {{$username}}</label></br>
+				     <label  class="">Date Started {{$dateStarted}}</label></br>
+				     <label  class="">Total Distance In Commute {{$totalDistance}}</label></br>
+				     <label  class="">Amount of CO2 emissions {{$emissionAmount}}</label></br>
+				     <label  class="">Cost To Offset your Emission {{$cost}}</label></br>
 				     
 					<div class="panel-heading">
 					 	<h4>Plan A Trip</h4>

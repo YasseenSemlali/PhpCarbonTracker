@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Repositories\TripRepository;
 use App\Repositories\HereRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Trip;
+use App\User;
+
 
 class HomeController extends Controller
 {
@@ -21,9 +24,11 @@ class HomeController extends Controller
     public function __construct(TripRepository $trip, HereRepository $here)
 
     {
+
         $this->trip = $trip;
         $this->here = $here;
         $this->middleware('auth');
+ 
     }
 
     /**
@@ -34,11 +39,12 @@ class HomeController extends Controller
     public function index()
     {
         $trips = Trip::orderBy('created_at','DESC')->paginate(5);
+        $user = Auth::user();
         
         return view('home.index', [
             'trips' => $trips,
-            'username' => "John DOE",
-            'dateStarted' => 'Date xxxx',
+            'username' => $user->name,
+            'dateStarted' => $user->created_at,
             'totalDistance' => '30 km',
             'emissionAmount' => 'AMount Here ',
             'cost' => 'Cost offset Here '
@@ -52,7 +58,7 @@ class HomeController extends Controller
         $origin = $hereRepo->getLatitudeLongitude($request->origin);
         $destination = $hereRepo->getLatitudeLongitude($request->destinationTxt);
         var_dump($request->transportationMode);
-      // echo $destination[0];
+
        $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode);
         //validate here if necessary
         $request->user()->trips()->create([
@@ -60,13 +66,6 @@ class HomeController extends Controller
                      'start_longtitude' => $origin[1],
                      'end_lattitude' => $destination[0],
                      'end_longtitude' => $destination[1],
-                    
-                    
-                    // 'user_id' => 1,
-                    // 'start_lattitude' =>34,
-                    // 'start_longtitude' => -73.588405,
-                    // 'end_lattitude' => 402,
-                    // 'end_longtitude' => -73.588405,
                     'mode' =>$request->mode,
                     'engine' => 'diesel',
                     'travelTime' =>634,
@@ -76,5 +75,6 @@ class HomeController extends Controller
             'test2'=>$this->trip->getAllTrips(5)
             ]);
     }
+
     
 }

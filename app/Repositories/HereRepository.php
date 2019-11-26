@@ -25,25 +25,25 @@
         }
         
         public function getTrip(float $startLatitude, float $startLongitude,float $endLatitude,float $endLongtitude, string $transportType, string $fuelType = null, float $fuelConsumption = null) {
-            // $startResult = $this->getLatitudeLongitude($startAddress);
-            // $startLatitude = $startResult['latitude'];
-            // $startLongitude = $startResult['longtitude'];
-            
-            // $endResult = $this->getLatitudeLongitude($endAddress);
-            // $endLatitude = $endResult['latitude'];
-            // $endLongtitude = $endResult['longtitude'];
             
             $mode='fastest';
             $traffic = 'enabled';
             
-            $url = 'https://route.api.here.com/routing/7.2/calculateroute.json?app_id='.self::$app_id.'&app_code='.self::$app_code
-            .'&waypoint0='."geo!$startLatitude,$startLongitude".'&waypoint1='."geo!$endLatitude,$endLongtitude"."&mode=$mode;$transportType;traffic:$traffic";
+            $baseUrl = 'https://route.api.here.com/routing/7.2/calculateroute.json';
+            $query_array = array (
+                'app_code' => self::$app_code,
+                'app_id' => self::$app_id,
+                'waypoint0' =>  'geo!'.$startLatitude.','.$startLongitude,
+                'waypoint1' => 'geo!'.$endLatitude.','.$endLongtitude,
+                'mode' => 'fastest;'.$transportType.';traffic:'.$traffic,
+            );
             
             if($transportType == 'car') {
-                $url = "$url&vehicletype=$fuelType,$fuelConsumption";
+                $query_array['vehicletype'] = "$fuelType,$fuelConsumption";
             }
             
-            $contents = json_decode(file_get_contents($url), true);
+            $query = $baseUrl.'?'.http_build_query($query_array);
+            $contents = json_decode($this->makeRequest($query), true);
             //echo "<pre>"; print_r($contents); echo "</pre>";
             
             $result['distance'] = $contents['response']['route'][0]['summary']['distance'];
@@ -51,6 +51,18 @@
             if(isset( $contents['response']['route'][0]['summary']['co2Emission'])) {
                 $result['co2Emission'] =  $contents['response']['route'][0]['summary']['co2Emission'];
             }
+            
+            return $result;
+        }
+        
+        private function makeRequest($url) {
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch,CURLOPT_USERAGENT,"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($ch);
+            curl_close($ch);
             
             return $result;
         }

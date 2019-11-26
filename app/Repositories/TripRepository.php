@@ -48,6 +48,44 @@ use App\Repositories\HereRepository;
             $trip -> user_id = $user->id;
             
             $trip->save();
+            
+            return $trip;
+        }
+        
+        public function totalDistance(int $id = -1) {
+            if($id == -1) {
+                $user = Auth::user();
+            } else {
+                $user = User::findOrFail($id);
+            }
+            
+            $sum = $user->trips()->sum('distance');
+            
+            return $sum;
+        }
+        
+        public function totalCO2(int $id = -1) {
+            if($id == -1) {
+                $user = Auth::user();
+            } else {
+                $user = User::findOrFail($id);
+            }
+            
+            $sum = $user->trips()->sum('co2emissions');
+            
+            return $sum;
+        }
+        
+        public function totalCostToOffsetCO2(int $id = -1) {
+            if($id == -1) {
+                $user = Auth::user();
+            } else {
+                $user = User::findOrFail($id);
+            }
+            
+            $sum = $user->trips()->sum('co2emissions');
+            
+            return $sum * 30 / 1000;
         }
     }
 ?>

@@ -24,5 +24,16 @@ class TripsTableSeeder extends Seeder
              'co2emissions' => 19,
              'user_id' => 1
             ]);
+        Trip::create([
+            'start_lattitude' => 65,
+             'start_longtitude' => -56,
+             'end_lattitude' => 54,
+             'end_longtitude' => -34,
+             'mode' => 'bicycle',
+             'travelTime' => 1320,
+             'distance' => 300,
+             'co2emissions' => 2.4,
+             'user_id' => 1
+            ]);
     }
 }

@@ -51,19 +51,27 @@ class HomeController extends Controller
         $hereRepo = new HereRepository();
         $origin = $hereRepo->getLatitudeLongitude($request->origin);
         $destination = $hereRepo->getLatitudeLongitude($request->destinationTxt);
-       echo $destination[0];
-        $tripInfo = $hereRepo->getTrip($origin[0],$origin[1],$destination[0],$destination[1],$request->transportationMode);
+        var_dump($request->transportationMode);
+      // echo $destination[0];
+       $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode);
         //validate here if necessary
         $request->user()->trips()->create([
-                    'start_lattitude' =>$origin[0],
-                    'start_longtitude' => $origin[1],
-                    'end_lattitude' => $destination[0],
-                    'end_longtitude' => $destination[1],
+                 'start_lattitude' =>$origin[0],
+                     'start_longtitude' => $origin[1],
+                     'end_lattitude' => $destination[0],
+                     'end_longtitude' => $destination[1],
+                    
+                    
+                    // 'user_id' => 1,
+                    // 'start_lattitude' =>34,
+                    // 'start_longtitude' => -73.588405,
+                    // 'end_lattitude' => 402,
+                    // 'end_longtitude' => -73.588405,
                     'mode' =>$request->mode,
                     'engine' => 'diesel',
                     'travelTime' =>634,
                     'distance' => 1345,
-                    'co2emissions' => 0.385
+                    'co2emissions' => 1.3,
             ]);
     }
     

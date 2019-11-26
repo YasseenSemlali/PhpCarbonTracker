@@ -35,6 +35,7 @@ class HomeController extends Controller
     {
         return view('home.index', [
             //'test'=>$this->here->getTrip('1445 Guy St, Montreal, Quebec H3H 2L5', '358 Sainte-Catherine', 'car', 'diesel', 12)
+            'test2'=>$this->trip->getAllTrips(5)
             ]);
     }
     

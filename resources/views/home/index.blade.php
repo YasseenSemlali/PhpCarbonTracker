@@ -84,24 +84,32 @@
 								<th>&nbsp;</th>
 							</thead>
 							<tbody>
+								<tr>
+									<th class="table-text"> Transport Mode</th>
+									<th class="table-text">Engine</th>
+									<th class="table-text"> Distance Travelled</th>
+									<th class="table-text"> Trip Date</th>
+									<th class="table-text">Travel Time  </th>
+									<th class="table-text">CO2 Emitted</th>
+								</tr>
 								@foreach ($trips as $trip)
 									<tr>
-										<td class="table-text"><strong>Transport Mode</strong>
+										<td class="table-text">
 											{{ $trip->mode }}</td>
 						
-										<td class="table-text"><strong>Engine </strong>
+										<td class="table-text">
 											{{ $trip->engine }}</td>
 											
-								    	<td class="table-text"><strong>Distance Travelled </strong>
+								    	<td class="table-text">
 											{{ $trip->distance }} Km</td>
 											
-										<td class="table-text"><strong>Trip Date </strong>
+										<td class="table-text">
 											{{ $trip->created_at }}</td>
 										
-										<td class="table-text"><strong>Travel Time </strong>
+										<td class="table-text">
 											{{ $trip->travelTime }}</td>
 											
-										<td class="table-text"><strong>CO2 Emitted </strong>
+										<td class="table-text">
 											{{ $trip->co2emissions }}</td>
 											
 									</tr>

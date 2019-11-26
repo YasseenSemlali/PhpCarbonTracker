@@ -55,16 +55,16 @@
                             <label  class="col-md-4 col-form-label text-md-right">Transportation Mode</label>
                             
                             <select name = 'transportationMode'>
-                                <option value="drive">Drive</option>
+                                <option value="car">Drive</option>
                                 <option value="carpool">CarPool with 2 other people</option>
                                 <option value="publicTransport">Take Public Transport</option>
-                                <option value="bike">Bike</option>
-                                 <option value="walk">Walk</option>
+                                <option value="bicycle">Bike</option>
+                                 <option value="pedestrian">Walk</option>
                            </select>
                            
                        </div>
                          <div>
-                             <input type="submit" name="" Value = "Go"/>
+                             <Button type="submit" name="">Go</Button>
                          </div> 
                      </form>
                </div> 

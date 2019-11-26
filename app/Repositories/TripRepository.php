@@ -13,7 +13,6 @@ use App\Repositories\HereRepository;
             $this->here = $here;
         }
         
-        //tempoprary, make it take id as param later
         public function getAllTrips(int $paginate, int $id = -1) {
             if($id == -1) {
                 $user = Auth::user();
@@ -33,8 +32,22 @@ use App\Repositories\HereRepository;
                 $user = User::findOrFail($id);
             }
             
-            $trip = $this->here->getTrip($fromLatitude, $fromLongtude, $toLatitude, $toLongtude, $transportType, $fuelType, $fuelConsumption);
-            var_dump($trip);
+            $tripInfo = $this->here->getTrip($fromLatitude, $fromLongtude, $toLatitude, $toLongtude, $transportType, $fuelType, $fuelConsumption);
+            
+            $trip = new Trip;
+            
+            $trip -> start_lattitude = $fromLatitude;
+            $trip -> start_longtitude = $fromLongtude;
+            $trip -> end_lattitude = $toLatitude;
+            $trip -> end_longtitude = $toLongtude;
+            $trip -> mode = $transportType;
+            $trip -> engine = $fuelType;
+            $trip -> travelTime = $tripInfo['travelTime'];
+            $trip -> distance = $tripInfo['distance'];
+            $trip -> co2emissions = $tripInfo['co2Emission'];
+            $trip -> user_id = $user->id;
+            
+            $trip->save();
         }
     }
 ?>

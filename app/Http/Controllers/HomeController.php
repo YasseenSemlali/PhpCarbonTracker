@@ -38,6 +38,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $trips = Trip::orderBy('created_at','DESC')->paginate(5);
         $user = Auth::user();
         
@@ -48,40 +49,43 @@ class HomeController extends Controller
             'totalDistance' => '30 km',
             'emissionAmount' => 'AMount Here ',
             'cost' => 'Cost offset Here '
+
             ]);
     }
     
     
     public function addTrip(Request $request){
-        
+        $user = Auth::user();
         $hereRepo = new HereRepository();
         $origin = $hereRepo->getLatitudeLongitude($request->origin);
         $destination = $hereRepo->getLatitudeLongitude($request->destinationTxt);
-        var_dump($request->transportationMode);
-
-       $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode);
-        //validate here if necessary
-        $request->user()->trips()->create([
-                 'start_lattitude' =>$origin[0],
-                     'start_longtitude' => $origin[1],
-                     'end_lattitude' => $destination[0],
-                     'end_longtitude' => $destination[1],
-                    'mode' =>$request->mode,
-                    'engine' => 'diesel',
-                    'travelTime' =>634,
-                    'distance' => 1345,
-                    'co2emissions' => 1.3,
-            //'test'=>$this->here->getTrip('1445 Guy St, Montreal, Quebec H3H 2L5', '358 Sainte-Catherine', 'car', 'diesel', 12)
-
-        // $first = $this->here->getLatitudeLongitude('1445 Guy St, Montreal, Quebec H3H 2L5');
-        // $second = $this->here->getLatitudeLongitude('358 Sainte-Catherine');
         
-        // $this->trip->addTrip($first['latitude'], $first['longtitude'], $second['latitude'], $second['longtitude'], 'car', 'diesel', 12);
-        // return view('home.index', [
-        //     //'test'=>$this->here->getTrip($first['latitude'], $first['longtitude'], $second['latitude'], $second['longtitude'], 'car', 'diesel', 12),
+        if($request->transportationMode == "car"){
+            $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode, $user->fuel_type, $user->fuel_consumption);
+            $co2emissions = $tripInfo['co2Emission'];
+        }else if($request->transportationMode == "carpool"){
+            $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],'car',$user->fuel_type, $user->fuel_consumption);
+            $co2emissions = $tripInfo['co2Emission']/2;
+        }else{
+             $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode);
+            $co2emissions = 0.0;
+        }
 
-        //     'test2'=>$this->trip->getAllTrips(5)
+
+
+        $request->user()->trips()->create([
+                 'start_lattitude' =>$origin['latitude'],
+                     'start_longtitude' => $origin['longtitude'],
+                     'end_lattitude' => $destination['latitude'],
+                     'end_longtitude' => $destination['longtitude'],
+                    'mode' =>$request->transportationMode,
+                    'engine' => 'diesel',
+                    'travelTime' =>$tripInfo['travelTime'],
+                    'distance' => $tripInfo['distance'],
+                    'co2emissions' => $co2emissions,
+
             ]);
+            return redirect('/');
     }
 
     

@@ -27,7 +27,7 @@ class CreateTripsTable extends Migration
             $table->double('end_lattitude', 9,6);
             $table->double('end_longtitude', 9,6);
             
-            $table->enum('mode', ['car', 'publicTransport', 'bicycle','pedestrian'])->nullable();
+            $table->enum('mode', ['car', 'publicTransport', 'bicycle','pedestrian','carpool'])->nullable();
             $table->enum('engine', ['diesel', 'gasoline', 'electric'])->nullable();
             
             $table->integer('travelTime');

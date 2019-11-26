@@ -33,13 +33,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $first = $this->here->getLatitudeLongitude('1445 Guy St, Montreal, Quebec H3H 2L5');
-        $second = $this->here->getLatitudeLongitude('358 Sainte-Catherine');
+        //$first = $this->here->getLatitudeLongitude('1445 Guy St, Montreal, Quebec H3H 2L5');
+        //$second = $this->here->getLatitudeLongitude('358 Sainte-Catherine');
         
-        $this->trip->addTrip($first['latitude'], $first['longtitude'], $second['latitude'], $second['longtitude'], 'car', 'diesel', 12);
+        //$this->trip->addTrip($first['latitude'], $first['longtitude'], $second['latitude'], $second['longtitude'], 'car', 'diesel', 12);
         return view('home.index', [
             //'test'=>$this->here->getTrip($first['latitude'], $first['longtitude'], $second['latitude'], $second['longtitude'], 'car', 'diesel', 12),
-            'test2'=>$this->trip->getAllTrips(5)
+            //'test2'=>$this->trip->getAllTrips(5)
             ]);
     }
     

@@ -21,7 +21,7 @@ use App\Repositories\HereRepository;
             }
             
             $trips = $user->trips()->orderBy('created_at')->paginate($paginate);
-            var_dump($trips->toArray());
+            //var_dump($trips->toArray());
             return $trips;
         }
         

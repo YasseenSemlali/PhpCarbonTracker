@@ -41,14 +41,18 @@ class HomeController extends Controller
 
         $trips = Trip::orderBy('created_at','DESC')->paginate(5);
         $user = Auth::user();
-        
+        $totalDistance = $this->trip->totalDistance();
+         $co2sum =  $this->trip->totalCO2();
+        $offset = $this->trip->totalCostToOffsetCO2();
+
         return view('home.index', [
             'trips' => $trips,
             'username' => $user->name,
             'dateStarted' => $user->created_at,
-            'totalDistance' => '30 km',
-            'emissionAmount' => 'AMount Here ',
-            'cost' => 'Cost offset Here '
+            'totalDistance' => $totalDistance,
+            'emissionAmount' => $co2sum,
+            'cost' =>$offset,
+            'locations' =>$recentLocations;
 
             ]);
     }
@@ -57,18 +61,22 @@ class HomeController extends Controller
     public function addTrip(Request $request){
         $user = Auth::user();
         $hereRepo = new HereRepository();
+
         $origin = $hereRepo->getLatitudeLongitude($request->origin);
         $destination = $hereRepo->getLatitudeLongitude($request->destinationTxt);
         
         if($request->transportationMode == "car"){
             $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode, $user->fuel_type, $user->fuel_consumption);
             $co2emissions = $tripInfo['co2Emission'];
+            $fuelType = $user->fuel_type;
         }else if($request->transportationMode == "carpool"){
             $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],'car',$user->fuel_type, $user->fuel_consumption);
             $co2emissions = $tripInfo['co2Emission']/2;
+            $fuelType = $user->fuel_type;
         }else{
              $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode);
             $co2emissions = 0.0;
+            $fuelType = null;
         }
 
 
@@ -79,7 +87,7 @@ class HomeController extends Controller
                      'end_lattitude' => $destination['latitude'],
                      'end_longtitude' => $destination['longtitude'],
                     'mode' =>$request->transportationMode,
-                    'engine' => 'diesel',
+                    'engine' => $fuelType,
                     'travelTime' =>$tripInfo['travelTime'],
                     'distance' => $tripInfo['distance'],
                     'co2emissions' => $co2emissions,
@@ -87,6 +95,5 @@ class HomeController extends Controller
             ]);
             return redirect('/');
     }
-
     
 }

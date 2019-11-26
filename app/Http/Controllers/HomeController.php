@@ -72,6 +72,8 @@ class HomeController extends Controller
                     'travelTime' =>634,
                     'distance' => 1345,
                     'co2emissions' => 1.3,
+            //'test'=>$this->here->getTrip('1445 Guy St, Montreal, Quebec H3H 2L5', '358 Sainte-Catherine', 'car', 'diesel', 12)
+            'test2'=>$this->trip->getAllTrips(5)
             ]);
     }
     

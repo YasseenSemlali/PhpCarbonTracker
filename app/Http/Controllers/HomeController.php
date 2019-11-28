@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Trip;
 use App\User;
 use App\Locations;
-
+use DB;
 
 class HomeController extends Controller
 {
@@ -42,11 +42,10 @@ class HomeController extends Controller
 
         $trips = Trip::orderBy('created_at','DESC')->paginate(5);
         $user = Auth::user();
-        $recentLocations = 
+        $recentLocations =  db::table('locations')->select('name')->distinct()->get();
         $totalDistance = $this->trip->totalDistance();
          $co2sum =  $this->trip->totalCO2();
         $offset = $this->trip->totalCostToOffsetCO2();
-
         return view('home.index', [
             'trips' => $trips,
             'username' => $user->name,
@@ -64,13 +63,34 @@ class HomeController extends Controller
         $user = Auth::user();
         $hereRepo = new HereRepository();
 
-        $origin = $hereRepo->getLatitudeLongitude($request->origin);
-        $destination = $hereRepo->getLatitudeLongitude($request->destinationTxt);
+       // $origin = $hereRepo->getLatitudeLongitude($request->origin);
+     //   $destination = $hereRepo->getLatitudeLongitude($request->destination);
         
+        if($request->start == "home"){
+            $origin['latitude'] = $user->lattitude;
+            $origin['longtitude'] = $user->longtitude;
+            
+        }else{
+              $origin = $hereRepo->getLatitudeLongitude($request->start);
+        }
+        
+        if($request->destination == "home"){
+            
+             $destination['latitude'] = $user->lattitude;
+             $destination['longtitude'] = $user->longtitude;
+             
+        }else{
+              $destination = $hereRepo->getLatitudeLongitude($request->destination);
+        }
+        
+        //if the selection is a car i provide extra arguments
         if($request->transportationMode == "car"){
+            
             $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode, $user->fuel_type, $user->fuel_consumption);
             $co2emissions = $tripInfo['co2Emission'];
             $fuelType = $user->fuel_type;
+            
+            //if the selection is carpool i divide the emission by 2
         }else if($request->transportationMode == "carpool"){
             $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],'car',$user->fuel_type, $user->fuel_consumption);
             $co2emissions = $tripInfo['co2Emission']/2;
@@ -94,6 +114,20 @@ class HomeController extends Controller
                     'distance' => $tripInfo['distance'],
                     'co2emissions' => $co2emissions,
 
+            ]);
+            
+        $request->user()->locations()->create([
+                 'name' => $request->start,
+                 'lattitude' =>$origin['latitude'],
+                 'longtitude' => $origin['longtitude'],
+                
+            ]);
+            
+        $request->user()->locations()->create([
+                 'name' => $request->destination,
+                 'lattitude' =>$destination['latitude'],
+                 'longtitude' => $destination['longtitude'],
+                
             ]);
             return redirect('/');
     }

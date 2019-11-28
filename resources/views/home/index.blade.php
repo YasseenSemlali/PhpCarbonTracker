@@ -1,5 +1,8 @@
+<!-- Scripts -->
+<script src="{{ asset('js/index.js') }}" defer></script>
+    
 @extends('layouts.app')
-
+    
 @section('content')
 	<div class="container">
 		<div class="col-sm-offset-2 col-sm-8">
@@ -34,22 +37,28 @@
 			          {{csrf_field() }}
 			     
                         <label  class="col-md-4 col-form-label text-md-right">Starting Position</label>
-                              <input type="text" name="origin" >
-                                    <select name = 'start'>                                                                                                                                                                                                                                                                                                               
-                                      <option value="none"></option>
-                                      <option value="Dawson">Dawson</option>
-                                      <option value="Home">Home</option>
-                                      <option value="house">FriendHouse</option>
+                                   <select name ='start' id="origin">      
+                                   
+                                   	   	@foreach ($locations as $location)
+				     						<option value = "{{$location->name}}"> {{$location->name}}</option>
+				     					@endforeach
+                                      <option value="home">Home</option>
+                                      <option value="other">other</option>
                                     </select>
-                        <label  class="col-md-4 col-form-label text-md-right">Destination</label>
-                        <input type="text" name="destinationTxt" >
-                         <select name = 'destination'>
-                            <option value="none"></option>
-                            <option value="Dawson">Dawson</option>
-                            <option value="Home">Home</option>
-                            <option value="house">FriendHouse</option>
-                       </select>
+                        <div id = "fillOrigin">
+                       	
+                       </div>
                        
+                        <label  class="col-md-4 col-form-label text-md-right">Destination</label>
+                         <select name = 'destination' id = "destination">
+                               	 <option value="home">Home</option>
+                               	@foreach ($locations as $location)
+				     				<option value = "{{$location->name}}"> {{$location->name}}</option>
+		  						@endforeach
+		  						
+                            <option value="other">other</option>
+                       </select>
+                       <div id = "fillDest"></div>
                        <div class="">
                            
                             <label  class="col-md-4 col-form-label text-md-right">Transportation Mode</label>

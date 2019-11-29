@@ -43,7 +43,6 @@
             }
             
             $query = $baseUrl.'?'.http_build_query($query_array);
-            echo $query;
             $contents = json_decode($this->makeRequest($query), true);
             
             //echo "<pre>"; print_r($contents); echo "</pre>";

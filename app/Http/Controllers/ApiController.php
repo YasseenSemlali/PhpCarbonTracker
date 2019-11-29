@@ -49,8 +49,14 @@ class ApiController extends Controller
     	if (!$user)
     	 return response()->json(['error' => 'invalid_token'], 401);
     	else {
-    	    echo $request->query('fromlatitude');
-    	    $trip = $this->here->getTrip();
+    	    $startLatitude = $request->query('fromlatitude');
+    	    $startLongitude = $request->query('fromlongitude');
+    	    $endLatitude = $request->query('tolatitude');
+    	    $endLongtitude = $request->query('tolongitude');
+    	    $transportType = $request->query('mode');
+    	    $fuelType = $request->query('engine');
+    	    $fuelConsumption = $request->query('consumption');
+    	    $trip = $this->here->getTrip($startLatitude, $startLongitude,$endLatitude ,$endLongtitude ,$transportType ,$fuelType, $fuelConsumption );
     		//$stories = Story::where('user_id', '=',$user->id)->orderBy('created_at', 'desc')->get();	
     		//return response()->json($stories, 200);
     	}

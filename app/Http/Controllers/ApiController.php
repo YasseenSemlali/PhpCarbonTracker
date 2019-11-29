@@ -14,7 +14,7 @@ class ApiController extends Controller
     private $trip;
     private $here;
         
-    public function __construct(RepositoriesTripRepository $trip, HereRepository $here) {
+    public function __construct(TripRepository $trip, HereRepository $here) {
         $this->trip = $trip;
         $this->here = $here;
     }

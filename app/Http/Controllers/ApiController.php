@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Trip;
-use App\RepositoriesTripRepository;
+use App\Repositories\TripRepository;
 use App\Repositories\HereRepository;
 
 class ApiController extends Controller

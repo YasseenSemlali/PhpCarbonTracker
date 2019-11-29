@@ -56,8 +56,22 @@ class ApiController extends Controller
     	    $transportType = $request->query('mode');
     	    $fuelType = $request->query('engine');
     	    $fuelConsumption = $request->query('consumption');
+    	    
+    	    
+    	    
+    	    if($transportType == 'car' && !(isset($fuelType) && isset($fuelConsumption))) {
+    	        $err[] = 'fuel type and fuel consumption must be set';
+    	        
+    	    }
+    	    
     	    $trip = $this->here->getTrip($startLatitude, $startLongitude,$endLatitude ,$endLongtitude ,$transportType ,$fuelType, $fuelConsumption );
     	    
+    	    if(isset($err)) {
+    	        return response()->json([
+    	                'message' => 'The given data was invalid',
+    	                'errors' => $err
+    	            ]);
+    	    }
     		return response()->json($trip);
     	}
     }

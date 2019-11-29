@@ -45,7 +45,6 @@
             $query = $baseUrl.'?'.http_build_query($query_array);
             $contents = json_decode($this->makeRequest($query), true);
             
-            var_dump($contents);
             //echo "<pre>"; print_r($contents); echo "</pre>";
             
             $result['distance'] = $contents['response']['route'][0]['summary']['distance'];

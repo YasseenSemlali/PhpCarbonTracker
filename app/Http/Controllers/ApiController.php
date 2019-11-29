@@ -77,7 +77,7 @@ class ApiController extends Controller
     	        $err[] = 'mode must be set';
     	    }
     	    
-    	    if($transportType == 'car' && !(isset($fuelType) && isset($fuelConsumption))) {
+    	    if($mode == 'car' && !(isset($engine) && isset($consumption))) {
     	        $err[] = 'fuel type and fuel consumption must be set';
     	        
     	    }
@@ -89,7 +89,7 @@ class ApiController extends Controller
     	            ]);
     	    }
     	    
-    	    $trip = $this->here->getTrip($startLatitude, $startLongitude,$endLatitude ,$endLongtitude ,$transportType ,$fuelType, $fuelConsumption );
+    	    $trip = $this->here->getTrip($fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$mode, $consumption );
     	    
     	   
     		return response()->json($trip);

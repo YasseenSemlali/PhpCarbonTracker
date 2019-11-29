@@ -64,14 +64,16 @@ class ApiController extends Controller
     	        
     	    }
     	    
-    	    $trip = $this->here->getTrip($startLatitude, $startLongitude,$endLatitude ,$endLongtitude ,$transportType ,$fuelType, $fuelConsumption );
-    	    
-    	    if(isset($err)) {
+    	     if(isset($err)) {
     	        return response()->json([
     	                'message' => 'The given data was invalid',
     	                'errors' => $err
     	            ]);
     	    }
+    	    
+    	    $trip = $this->here->getTrip($startLatitude, $startLongitude,$endLatitude ,$endLongtitude ,$transportType ,$fuelType, $fuelConsumption );
+    	    
+    	   
     		return response()->json($trip);
     	}
     }

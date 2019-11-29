@@ -13,24 +13,16 @@ use App\Repositories\HereRepository;
             $this->here = $here;
         }
         
-        public function getAllTrips(int $paginate, int $id = -1) {
-            if($id == -1) {
-                $user = Auth::user();
-            } else {
-                $user = User::findOrFail($id);
-            }
-            
+        public function getAllTrips(int $paginate) {
+            $user = Auth::user();
+             
             $trips = $user->trips()->orderBy('created_at')->paginate($paginate);
             //var_dump($trips->toArray());
             return $trips;
         }
         
         public function addTrip(float $fromLatitude, float $fromLongtude, float $toLatitude, float $toLongtude, string $transportType, string $fuelType = null, float $fuelConsumption = null, int $id = -1) {
-            if($id == -1) {
-                $user = Auth::user();
-            } else {
-                $user = User::findOrFail($id);
-            }
+            $user = Auth::user();
             
             $tripInfo = $this->here->getTrip($fromLatitude, $fromLongtude, $toLatitude, $toLongtude, $transportType, $fuelType, $fuelConsumption);
             

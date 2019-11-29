@@ -49,15 +49,33 @@ class ApiController extends Controller
     	if (!$user)
     	 return response()->json(['error' => 'invalid_token'], 401);
     	else {
-    	    $startLatitude = $request->query('fromlatitude');
-    	    $startLongitude = $request->query('fromlongitude');
-    	    $endLatitude = $request->query('tolatitude');
-    	    $endLongtitude = $request->query('tolongitude');
-    	    $transportType = $request->query('mode');
-    	    $fuelType = $request->query('engine');
-    	    $fuelConsumption = $request->query('consumption');
+    	    $fromlatitude = $request->query('fromlatitude');
+    	    $fromlongitude = $request->query('fromlongitude');
+    	    $tolatitude = $request->query('tolatitude');
+    	    $tolongitude = $request->query('tolongitude');
+    	    $mode = $request->query('mode');
+    	    $engine = $request->query('engine');
+    	    $consumption = $request->query('consumption');
     	    
+    	    if(!isset($fromlatitude)) {
+    	        $err[] = 'fromlatitude must be set';
+    	    }
     	    
+    	    if(!isset($fromlongitude)) {
+    	        $err[] = 'fromlongitude must be set';
+    	    }
+    	    
+    	    if(!isset($tolatitude)) {
+    	        $err[] = 'tolatitude must be set';
+    	    }
+    	    
+    	    if(!isset($tolongitude)) {
+    	        $err[] = 'tolongitude must be set';
+    	    }
+    	    
+    	    if(!isset($mode)) {
+    	        $err[] = 'mode must be set';
+    	    }
     	    
     	    if($transportType == 'car' && !(isset($fuelType) && isset($fuelConsumption))) {
     	        $err[] = 'fuel type and fuel consumption must be set';

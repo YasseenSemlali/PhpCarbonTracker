@@ -57,8 +57,8 @@ class ApiController extends Controller
     	    $fuelType = $request->query('engine');
     	    $fuelConsumption = $request->query('consumption');
     	    $trip = $this->here->getTrip($startLatitude, $startLongitude,$endLatitude ,$endLongtitude ,$transportType ,$fuelType, $fuelConsumption );
-    		//$stories = Story::where('user_id', '=',$user->id)->orderBy('created_at', 'desc')->get();	
-    		//return response()->json($stories, 200);
+    	    
+    		return response()->json($trip);
     	}
     }
     

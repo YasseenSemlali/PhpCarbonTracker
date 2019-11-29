@@ -19,7 +19,7 @@ class ApiController extends Controller
         $this->here = $here;
     }
     
-    public function alltrips() {
+    public function alltrips(Request $request) {
         $user = auth('api')->user(); //returns null if not valid
     	if (!$user)
     	 return response()->json(['error' => 'invalid_token'], 401);
@@ -44,17 +44,19 @@ class ApiController extends Controller
     	}
     }
     
-    public function tripinfo() {
+    public function tripinfo(Request $request) {
         $user = auth('api')->user(); //returns null if not valid
     	if (!$user)
     	 return response()->json(['error' => 'invalid_token'], 401);
     	else {
+    	    echo $request->query('fromlatitude');
+    	    $trip = $this->here->getTrip();
     		//$stories = Story::where('user_id', '=',$user->id)->orderBy('created_at', 'desc')->get();	
     		//return response()->json($stories, 200);
     	}
     }
     
-    public function addtrip() {
+    public function addtrip(Request $request) {
         $user = auth('api')->user(); //returns null if not valid
     	if (!$user)
     	 return response()->json(['error' => 'invalid_token'], 401);

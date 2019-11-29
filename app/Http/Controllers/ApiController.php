@@ -50,7 +50,7 @@ class ApiController extends Controller
     	 return response()->json(['error' => 'invalid_token'], 401);
     	else {
     		//$stories = Story::where('user_id', '=',$user->id)->orderBy('created_at', 'desc')->get();	
-    		return response()->json($stories, 200);
+    		//return response()->json($stories, 200);
     	}
     }
     
@@ -60,18 +60,7 @@ class ApiController extends Controller
     	 return response()->json(['error' => 'invalid_token'], 401);
     	else {
     		//$stories = Story::where('user_id', '=',$user->id)->orderBy('created_at', 'desc')->get();	
-    		return response()->json($stories, 200);
-    	}
-    }
-    
-    public function byauthor(Request $request)
-    {
-    	$user = auth('api')->user(); //returns null if not valid
-    	if (!$user)
-    	 return response()->json(['error' => 'invalid_token'], 401);
-    	else {
-    		$stories = Story::where('user_id', '=',$user->id)->orderBy('created_at', 'desc')->get();	
-    		return response()->json($stories, 200);
+    		//return response()->json($stories, 200);
     	}
     }
 

@@ -89,7 +89,7 @@ class ApiController extends Controller
     	            ]);
     	    }
     	    
-    	    $trip = $this->here->getTrip($fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$mode, $consumption );
+    	    $trip = $this->here->getTrip($fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$engine, $consumption );
     	    
     	   
     		return response()->json($trip);

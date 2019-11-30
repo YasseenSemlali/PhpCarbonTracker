@@ -4,14 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Carbon Emission Tracker</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+       
         <!-- Styles -->
         <style>
             html, body {
+               
                 background-color: #fff;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
@@ -45,7 +46,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 39px;
             }
 
             .links > a {
@@ -81,19 +82,33 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Carbon Emission Tracker
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <!--<div class="links">-->
+                <!--    <a href="https://laravel.com/docs">Docs</a>-->
+                <!--    <a href="https://laracasts.com">Laracasts</a>-->
+                <!--    <a href="https://laravel-news.com">News</a>-->
+                <!--    <a href="https://blog.laravel.com">Blog</a>-->
+                <!--    <a href="https://nova.laravel.com">Nova</a>-->
+                <!--    <a href="https://forge.laravel.com">Forge</a>-->
+                <!--    <a href="https://vapor.laravel.com">Vapor</a>-->
+                <!--    <a href="https://github.com/laravel/laravel">GitHub</a>-->
+                <!--</div>-->
+                
+                <div>
+                    <div>An Interesting Fact:</div>
+                    <div>
+                       <p> <mark>Electricity = Carbon Dioxide </mark>– like it or not, every time you plug in, 
+                        you are impacting the environment through carbon emissions. Power plants all over the world utilize fossil fuels, 
+                        coal, and alternative energies such as nuclear, wind, water, and solar. Unfortunately there is still a carbon impact. 
+                        Even discarded batteries from laptops or cell phones can leave a deadly impact in landfills. Consider unplugging for one day,
+                        or even a few hours, each week. Find an activity that does not involve electricity, and enjoy it..</p> 
+                    </div>
+                    
+
                 </div>
+                
             </div>
         </div>
     </body>

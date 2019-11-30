@@ -1,6 +1,8 @@
 <!-- Scripts -->
 <script src="{{ asset('js/index.js') }}" defer></script>
     
+<!-- Styles -->
+<link href="{{ asset('css/index.css') }}" rel="stylesheet">
 @extends('layouts.app')
     
 @section('content')
@@ -42,7 +44,7 @@
                                    	   	@foreach ($locations as $location)
 				     						<option value = "{{$location->name}}"> {{$location->name}}</option>
 				     					@endforeach
-                                      <option value="home">Home</option>
+                          
                                       <option value="other">other</option>
                                     </select>
                         <div id = "fillOrigin">
@@ -51,7 +53,7 @@
                        
                         <label  class="col-md-4 col-form-label text-md-right">Destination</label>
                          <select name = 'destination' id = "destination">
-                               	 <option value="home">Home</option>
+
                                	@foreach ($locations as $location)
 				     				<option value = "{{$location->name}}"> {{$location->name}}</option>
 		  						@endforeach
@@ -87,7 +89,7 @@
 					</div>
 
 					<div class="panel-body">
-						<table class="table table-striped task-table">
+						<table class="table table-striped task-table" id = "tripTable">
 							<thead>
 								<th>Recent Trips</th>
 								<th>&nbsp;</th>
@@ -123,15 +125,17 @@
 											
 									</tr>
 									
+									
 								@endforeach
 							</tbody>
-						</table>
-						{!! $trips->render() !!}
+						</table>{!! $trips->render() !!}
 					</div>
 				</div>
-			@endif
 
-            
+					@endif
+
+            <svg class="line-chart"></svg>
+<script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1/dist/chart.xkcd.min.js"></script>
 		</div>
 	</div>
 @endsection

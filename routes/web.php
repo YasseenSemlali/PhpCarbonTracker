@@ -19,8 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@home');
+//Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
-Route::get('/', 'HomeController@index');
 Route::post('/home','HomeController@addTrip')->middleware('auth');
 

@@ -16,7 +16,7 @@ class LocationsTableSeeder extends Seeder
         Locations::create([
             'lattitude' => 45.48576075,
              'longtitude' =>  -73.55347128718986,
-             'name' => '300 Rue Bridge, MONTREAL QC H3K 2C3',
+             'name' => 'Home',
              'user_id' => 1
             ]);
     }

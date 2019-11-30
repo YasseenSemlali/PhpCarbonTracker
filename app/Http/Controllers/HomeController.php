@@ -40,12 +40,17 @@ class HomeController extends Controller
     public function index()
     {
 
-        $trips = Trip::orderBy('created_at','DESC')->paginate(5);
+        
         $user = Auth::user();
-        $recentLocations =  db::table('locations')->select('name')->distinct()->get();
+        
+        $trips = $this->trip->getAllTrips(5);
+      
+       $recentLocations = $this->trip->getAllRecentLocations();
+        
         $totalDistance = $this->trip->totalDistance();
-         $co2sum =  $this->trip->totalCO2();
+        $co2sum =  $this->trip->totalCO2();
         $offset = $this->trip->totalCostToOffsetCO2();
+        
         return view('home.index', [
             'trips' => $trips,
             'username' => $user->name,
@@ -63,10 +68,8 @@ class HomeController extends Controller
         $user = Auth::user();
         $hereRepo = new HereRepository();
 
-       // $origin = $hereRepo->getLatitudeLongitude($request->origin);
-     //   $destination = $hereRepo->getLatitudeLongitude($request->destination);
         
-        if($request->start == "home"){
+        if($request->start == "Home"){
             $origin['latitude'] = $user->lattitude;
             $origin['longtitude'] = $user->longtitude;
             
@@ -74,7 +77,7 @@ class HomeController extends Controller
               $origin = $hereRepo->getLatitudeLongitude($request->start);
         }
         
-        if($request->destination == "home"){
+        if($request->destination == "Home"){
             
              $destination['latitude'] = $user->lattitude;
              $destination['longtitude'] = $user->longtitude;
@@ -82,6 +85,7 @@ class HomeController extends Controller
         }else{
               $destination = $hereRepo->getLatitudeLongitude($request->destination);
         }
+        
         
         //if the selection is a car i provide extra arguments
         if($request->transportationMode == "car"){
@@ -129,7 +133,10 @@ class HomeController extends Controller
                  'longtitude' => $destination['longtitude'],
                 
             ]);
-            return redirect('/');
+            return redirect('/home');
     }
     
+    public function home(){
+        return view('welcome');
+    }
 }

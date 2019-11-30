@@ -72,7 +72,7 @@ function init(){
     
     function drawChart(){
     getTableData();
-    //if(dates.length != 0){}
+
      const svg = document.querySelector('.line-chart')
      new chartXkcd.Line(svg, {
         title: 'Carbon Emission Chart',

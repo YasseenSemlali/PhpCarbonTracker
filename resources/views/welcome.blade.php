@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -12,9 +13,11 @@
         <!-- Styles -->
         <style>
             html, body {
-               
-                background-color: #fff;
-                color: #636b6f;
+               background-image:url('images/enviro.jpg');
+                /*background-color: #fff;*/
+               background-color: #9fdf9f;
+                /*color: #636b6f;*/
+                color:	#000000;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -59,6 +62,11 @@
                 text-transform: uppercase;
             }
 
+            .fact{
+                 text-align: center;
+                 margin-left: 20%;
+                margin-right: 20%;
+            }
             .m-b-md {
                 margin-bottom: 30px;
             }
@@ -98,7 +106,7 @@
                 
                 <div>
                     <div>An Interesting Fact:</div>
-                    <div>
+                    <div class= "fact">
                        <p> <mark>Electricity = Carbon Dioxide </mark>– like it or not, every time you plug in, 
                         you are impacting the environment through carbon emissions. Power plants all over the world utilize fossil fuels, 
                         coal, and alternative energies such as nuclear, wind, water, and solar. Unfortunately there is still a carbon impact. 

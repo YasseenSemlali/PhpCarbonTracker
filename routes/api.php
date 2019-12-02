@@ -27,8 +27,6 @@ Route::group([
 
 });
 
-Route::post('v1/author', 'ApiController@byauthor')->middleware('api');
-
 Route::get('v1/alltrips', 'ApiController@alltrips')->middleware('api');;
 Route::get('v1/tripinfo', 'ApiController@tripinfo')->middleware('api');;
 Route::post('v1/addtrip', 'ApiController@addtrip')->middleware('api');;

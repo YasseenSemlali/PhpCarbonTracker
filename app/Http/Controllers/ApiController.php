@@ -91,16 +91,9 @@ class ApiController extends Controller
     	    
     	    $trip = $this->here->getTrip($fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$engine, $consumption );
     	    
-    	    $response['id'] = $trip->id;
-    		$response['from']['latitude'] = $trip->start_lattitude;
-    		$response['from']['longtitude'] = $trip->start_longtitude;
-    		$response['to']['latitude'] = $trip->end_lattitude;
-    		$response['to']['longtitude'] = $trip->end_longtitude;
-    		$response['mode'] = $trip->mode;
     		$response['distance'] = $trip->distance;
     		$response['traveltime'] = $trip->travelTime;
     		$response['co2emissions'] = $trip->co2emissions;
-    		$response['created_at'] = $trip->created_at;
     		    
     		return response()->json($response);
     	}
@@ -148,7 +141,7 @@ class ApiController extends Controller
     	        return response()->json([
     	                'message' => 'The given data was invalid',
     	                'errors' => $err
-    	            ]);
+    	            ], 422);
     	    }
     	    
     	    $trip = $this->trip->getTrip($fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$engine, $consumption );

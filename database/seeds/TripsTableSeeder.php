@@ -12,6 +12,7 @@ class TripsTableSeeder extends Seeder
      */
     public function run()
     {
+
         Trip::create([
             'start_lattitude' => 75,
              'start_longtitude' => -97,
@@ -35,5 +36,6 @@ class TripsTableSeeder extends Seeder
              'co2emissions' => 2.4,
              'user_id' => 1
             ]);
+
     }
 }

@@ -19,8 +19,8 @@ class UsersTableSeeder extends Seeder
             'name'=> 'first user',
             'email'=> 'first@email.com',
             'password'=> Hash::make('password'),
-            'lattitude'=> 74,
-            'longtitude'=> -96,
+            'lattitude'=> 45.48576075,
+            'longtitude'=> -73.55347128718986,
             'fuel_type'=> 'diesel',
             'fuel_consumption' => 12,
             ]);

@@ -19,7 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@home');
+//Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::get('/', 'HomeController@index');
 Route::post('/home','HomeController@index')->middleware('auth');
@@ -28,4 +29,6 @@ Route::post('/home','HomeController@index')->middleware('auth');
 Route::get('/api/v1/alltrips', 'ApiController@alltrips');
 Route::get('/api/v1/tripinfo', 'ApiController@tripinfo');
 Route::get('/api/v1/addtrip', 'ApiController@addtrip');
+
+Route::post('/home','HomeController@addTrip')->middleware('auth');
 

@@ -20,8 +20,16 @@ class CreateLocationsTable extends Migration
             $table->double('lattitude', 9,6);
             $table->double('longtitude', 9,6);
             
-            $table->string('name', 40);
+            $table->string('name', 60);
+            
+            $table->unsignedBigInteger('user_id');
+           // $table->foreign('user_id')->references('id')->on('users');
         });
+        
+          Schema::table('locations', function($table) {
+       $table->foreign('user_id')->references('id')->on('users');
+          });
+
     }
 
     /**

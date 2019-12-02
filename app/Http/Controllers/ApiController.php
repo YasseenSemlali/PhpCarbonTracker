@@ -40,7 +40,7 @@ class ApiController extends Controller
     		    
     		    $allTrips[] = $response;
     		}
-    		return response()->json($allTrips, 200);
+    		return response()->json($allTrips);
     	}
     }
     

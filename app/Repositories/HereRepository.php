@@ -50,7 +50,9 @@
             $result['distance'] = $contents['response']['route'][0]['summary']['distance'];
             $result['travelTime'] = $contents['response']['route'][0]['summary']['travelTime'];
             if(isset( $contents['response']['route'][0]['summary']['co2Emission'])) {
-                $result['co2Emission'] =  $contents['response']['route'][0]['summary']['co2Emission'];
+                $result['co2emissions'] =  $contents['response']['route'][0]['summary']['co2Emission'];
+            } else {
+                 $result['co2emissions']=0;
             }
             
             return $result;

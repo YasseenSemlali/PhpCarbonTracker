@@ -93,7 +93,7 @@ class ApiController extends Controller
     	    
     		$response['distance'] = $trip['distance'];
     		$response['traveltime'] = $trip['travelTime'];
-    		$response['co2emissions'] = $trip['co2emission'];
+    		$response['co2emissions'] = $trip['co2emissions'];
     		    
     		return response()->json($response);
     	}

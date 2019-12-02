@@ -24,7 +24,7 @@ class ApiController extends Controller
     	if (!$user)
     	 return response()->json(['error' => 'invalid_token'], 401);
     	else {
-    		$trips = $this->trip->getAllTrips($user->id);	
+    		$trips = $this->trip->getAllTrips($user, 1000);	
     		
     		foreach($trips as $trip) {
     		    $response['id'] = $trip->id;
@@ -91,7 +91,7 @@ class ApiController extends Controller
     	    
     	    $trip = $this->here->getTrip($fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$engine, $consumption );
     	    
-    	   $response['id'] = $trip->id;
+    	    $response['id'] = $trip->id;
     		$response['from']['latitude'] = $trip->start_lattitude;
     		$response['from']['longtitude'] = $trip->start_longtitude;
     		$response['to']['latitude'] = $trip->end_lattitude;

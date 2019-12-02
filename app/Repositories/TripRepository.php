@@ -4,6 +4,7 @@
 
     use App\Trip;
     use App\User;
+    use DB;
 use App\Repositories\HereRepository;
 
     class TripRepository {
@@ -20,8 +21,8 @@ use App\Repositories\HereRepository;
                 $user = User::findOrFail($id);
             }
             
-            $trips = $user->trips()->orderBy('created_at')->paginate($paginate);
-            var_dump($trips->toArray());
+            $trips = $user->trips()->orderBy('created_at','DESC')->paginate($paginate);
+           // var_dump($trips->toArray());
             return $trips;
         }
         
@@ -86,6 +87,17 @@ use App\Repositories\HereRepository;
             $sum = $user->trips()->sum('co2emissions');
             
             return $sum * 30 / 1000;
+        }
+        
+        public function getAllRecentLocations(int $id= -1){
+             if($id == -1) {
+                $user = Auth::user();
+            } else {
+                $user = User::findOrFail($id);
+            }
+             $locations =  db::table('locations')->select('name')->distinct()->get();
+             
+            return $locations;
         }
     }
 ?>

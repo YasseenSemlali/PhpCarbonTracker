@@ -86,7 +86,7 @@ class ApiController extends Controller
     	        return response()->json([
     	                'message' => 'The given data was invalid',
     	                'errors' => $err
-    	            ]);
+    	            ], 422);
     	    }
     	    
     	    $trip = $this->here->getTrip($fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$engine, $consumption );

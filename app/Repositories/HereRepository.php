@@ -51,7 +51,9 @@
             $result['travelTime'] = $contents['response']['route'][0]['summary']['travelTime'];
             if(isset( $contents['response']['route'][0]['summary']['co2Emission'])) {
                 $result['co2emissions'] =  $contents['response']['route'][0]['summary']['co2Emission'];
-            } else {
+            } else if ($transportType == 'publicTransport') {
+                 $result['co2emissions']=  $result['distance'] / 1000 * 0.0462;
+            }else {
                  $result['co2emissions']=0;
             }
             

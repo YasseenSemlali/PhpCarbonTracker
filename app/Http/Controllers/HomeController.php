@@ -43,7 +43,7 @@ class HomeController extends Controller
         
         $trips = $this->trip->getAllTrips(5);
       
-       $recentLocations = $this->trip->getAllRecentLocations();
+        $recentLocations = $this->trip->getAllRecentLocations();
         
         $totalDistance = $this->trip->totalDistance();
         $co2sum =  $this->trip->totalCO2();

@@ -28,7 +28,7 @@ Route::post('/home','HomeController@index')->middleware('auth');
 
 Route::get('/api/v1/alltrips', 'ApiController@alltrips');
 Route::get('/api/v1/tripinfo', 'ApiController@tripinfo');
-Route::get('/api/v1/addtrip', 'ApiController@addtrip');
+Route::post('/api/v1/addtrip', 'ApiController@addtrip');
 
 Route::post('/home','HomeController@addTrip')->middleware('auth');
 

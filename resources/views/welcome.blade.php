@@ -13,7 +13,10 @@
         <!-- Styles -->
         <style>
             html, body {
-               background-image:url('images/enviro.jpg');
+               /*background-image:url('images/enviro.jpg');*/
+               
+                 background-image: url('http://blog.seagate.com/wp-content/uploads/2015/04/Global-strategy-for-environmental-sustainability.jpg');
+  background-size:auto;
                 /*background-color: #fff;*/
                background-color: #9fdf9f;
                 /*color: #636b6f;*/

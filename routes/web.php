@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@home');
 //Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::get('/', 'HomeController@index');
-Route::post('/home','HomeController@index')->middleware('auth');
+Route::post('/home','HomeController@index');
 
 
 Route::get('/api/v1/alltrips', 'ApiController@alltrips');

@@ -49,13 +49,13 @@ class ApiController extends Controller
     	if (!$user)
     	 return response()->json(['error' => 'invalid_token'], 401);
     	else {
-    	    $fromlatitude = $request->input('fromlatitude');
-    	    $fromlongitude = $request->input('fromlongitude');
-    	    $tolatitude = $request->input('tolatitude');
-    	    $tolongitude = $request->input('tolongitude');
-    	    $mode = $request->input('mode');
-    	    $engine = $request->input('engine');
-    	    $consumption = $request->input('consumption');
+    	    $fromlatitude = $request->query('fromlatitude');
+    	    $fromlongitude = $request->query('fromlongitude');
+    	    $tolatitude = $request->query('tolatitude');
+    	    $tolongitude = $request->query('tolongitude');
+    	    $mode = $request->query('mode');
+    	    $engine = $request->query('engine');
+    	    $consumption = $request->query('consumption');
     	    
     	    if(!isset($fromlatitude)) {
     	        $err[] = 'fromlatitude must be set';

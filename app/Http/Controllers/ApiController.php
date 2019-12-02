@@ -104,7 +104,6 @@ class ApiController extends Controller
     	if (!$user)
     	 return response()->json(['error' => 'invalid_token'], 401);
     	else {
-    	    echo 'test1';
     	    $fromlatitude = $request->query('fromlatitude');
     	    $fromlongitude = $request->query('fromlongitude');
     	    $tolatitude = $request->query('tolatitude');
@@ -112,7 +111,6 @@ class ApiController extends Controller
     	    $mode = $request->query('mode');
     	    $engine = $request->query('engine');
     	    $consumption = $request->query('consumption');
-    	    echo 'test2';
     	    
     	    if(!isset($fromlatitude)) {
     	        $err[] = 'fromlatitude must be set';
@@ -145,7 +143,6 @@ class ApiController extends Controller
     	                'errors' => $err
     	            ], 422);
     	    }
-    	    echo 'test3';
     	    
     	    $trip = $this->trip->addTrip($user, $fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$engine, $consumption );
     	    
@@ -161,7 +158,6 @@ class ApiController extends Controller
     		$response['distance'] = $trip->distance;
     		$response['traveltime'] = $trip->travelTime;
     		$response['co2emissions'] = $trip->co2emissions;
-    	    echo 'test4';
     		    
     		    
     		return response()->json($response);

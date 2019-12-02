@@ -14,25 +14,13 @@ use App\Repositories\HereRepository;
             $this->here = $here;
         }
         
-        public function getAllTrips(int $paginate, int $id = -1) {
-            if($id == -1) {
-                $user = Auth::user();
-            } else {
-                $user = User::findOrFail($id);
-            }
-            
-            $trips = $user->trips()->orderBy('created_at','DESC')->paginate($paginate);
-           // var_dump($trips->toArray());
+        public function getAllTrips(User $user,int $paginate) {
+            $trips = $user->trips()->orderBy('created_at', 'DESC')->paginate($paginate);
+
             return $trips;
         }
         
-        public function addTrip(float $fromLatitude, float $fromLongtude, float $toLatitude, float $toLongtude, string $transportType, string $fuelType = null, float $fuelConsumption = null, int $id = -1) {
-            if($id == -1) {
-                $user = Auth::user();
-            } else {
-                $user = User::findOrFail($id);
-            }
-            
+        public function addTrip(User $user, float $fromLatitude, float $fromLongtude, float $toLatitude, float $toLongtude, string $transportType, string $fuelType = null, float $fuelConsumption = null) {
             $tripInfo = $this->here->getTrip($fromLatitude, $fromLongtude, $toLatitude, $toLongtude, $transportType, $fuelType, $fuelConsumption);
             
             $trip = new Trip;
@@ -45,7 +33,7 @@ use App\Repositories\HereRepository;
             $trip -> engine = $fuelType;
             $trip -> travelTime = $tripInfo['travelTime'];
             $trip -> distance = $tripInfo['distance'];
-            $trip -> co2emissions = $tripInfo['co2Emission'];
+            $trip -> co2emissions = $tripInfo['co2emissions'];
             $trip -> user_id = $user->id;
             
             $trip->save();
@@ -53,48 +41,25 @@ use App\Repositories\HereRepository;
             return $trip;
         }
         
-        public function totalDistance(int $id = -1) {
-            if($id == -1) {
-                $user = Auth::user();
-            } else {
-                $user = User::findOrFail($id);
-            }
-            
+        public function totalDistance(User $user) {
             $sum = $user->trips()->sum('distance');
             
             return $sum;
         }
         
-        public function totalCO2(int $id = -1) {
-            if($id == -1) {
-                $user = Auth::user();
-            } else {
-                $user = User::findOrFail($id);
-            }
-            
+        public function totalCO2(User $user) {
             $sum = $user->trips()->sum('co2emissions');
             
             return $sum;
         }
         
-        public function totalCostToOffsetCO2(int $id = -1) {
-            if($id == -1) {
-                $user = Auth::user();
-            } else {
-                $user = User::findOrFail($id);
-            }
-            
+        public function totalCostToOffsetCO2(User $user) {
             $sum = $user->trips()->sum('co2emissions');
             
             return $sum * 30 / 1000;
         }
         
-        public function getAllRecentLocations(int $id= -1){
-             if($id == -1) {
-                $user = Auth::user();
-            } else {
-                $user = User::findOrFail($id);
-            }
+        public function getAllRecentLocations(User $user){
              $locations =  db::table('locations')->select('name')->distinct()->get();
              
             return $locations;

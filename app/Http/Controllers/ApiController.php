@@ -144,7 +144,7 @@ class ApiController extends Controller
     	            ], 422);
     	    }
     	    
-    	    $trip = $this->trip->getTrip($fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$engine, $consumption );
+    	    $trip = $this->trip->addTrip($user, $fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$engine, $consumption );
     	    
     	   
     		$response['id'] = $trip->id;
@@ -153,10 +153,12 @@ class ApiController extends Controller
     		$response['to']['latitude'] = $trip->end_lattitude;
     		$response['to']['longtitude'] = $trip->end_longtitude;
     		$response['mode'] = $trip->mode;
+    		$response['created_at'] = $trip->created_at;
+    		
     		$response['distance'] = $trip->distance;
     		$response['traveltime'] = $trip->travelTime;
     		$response['co2emissions'] = $trip->co2emissions;
-    		$response['created_at'] = $trip->created_at;
+    		    
     		    
     		return response()->json($response);
     	}

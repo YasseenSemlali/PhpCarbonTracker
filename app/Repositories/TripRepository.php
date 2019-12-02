@@ -20,7 +20,8 @@ use App\Repositories\HereRepository;
             return $trips;
         }
         
-        public function addTrip(User $user, float $fromLatitude, float $fromLongtude, float $toLatitude, float $toLongtude, string $transportType, string $fuelType = null, float $fuelConsumption = null) {$tripInfo = $this->here->getTrip($fromLatitude, $fromLongtude, $toLatitude, $toLongtude, $transportType, $fuelType, $fuelConsumption);
+        public function addTrip(User $user, float $fromLatitude, float $fromLongtude, float $toLatitude, float $toLongtude, string $transportType, string $fuelType = null, float $fuelConsumption = null) {
+            $tripInfo = $this->here->getTrip($fromLatitude, $fromLongtude, $toLatitude, $toLongtude, $transportType, $fuelType, $fuelConsumption);
             
             $trip = new Trip;
             
@@ -32,7 +33,7 @@ use App\Repositories\HereRepository;
             $trip -> engine = $fuelType;
             $trip -> travelTime = $tripInfo['travelTime'];
             $trip -> distance = $tripInfo['distance'];
-            $trip -> co2emissions = $tripInfo['co2Emission'];
+            $trip -> co2emissions = $tripInfo['co2emissions'];
             $trip -> user_id = $user->id;
             
             $trip->save();

@@ -103,8 +103,7 @@ class HomeController extends Controller
         
         //if the selection is a car i provide extra arguments
         if($request->transportationMode == "car"){
-            $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode, $user->fuel_type, $user->fuel_consumption);
-            
+
             if(count($tripInfo) == 0) {
                 $validator->getMessageBag()->add('destination', 'Could not calculate route to destination');
                 return redirect("/")->withErrors($validator);
@@ -116,6 +115,7 @@ class HomeController extends Controller
             //if the selection is carpool i divide the emission by 2
         }else if($request->transportationMode == "carpool"){
             $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],'car',$user->fuel_type, $user->fuel_consumption);
+
             
             if(count($tripInfo) == 0) {
                 $validator->getMessageBag()->add('destination', 'Could not calculate route to destination');
@@ -125,12 +125,12 @@ class HomeController extends Controller
             $fuelType = $user->fuel_type;
         }else{
              $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode);
-            
+
             if(count($tripInfo) == 0) {
                 $validator->getMessageBag()->add('destination', 'Could not calculate route to destination');
                 return redirect("/")->withErrors($validator);
             }
-            $co2emissions = 0.0;
+            $co2emissions = $tripInfo['co2emissions'];
             $fuelType = null;
         }
 

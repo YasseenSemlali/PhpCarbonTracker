@@ -36,16 +36,16 @@
 											{{ $trip->engine }}</td>
 											
 								    	<td class="table-text">
-											{{ $trip->distance }} Km</td>
+											{{ $trip->distance /1000 }} Km</td>
 											
 										<td class="table-text">
 											{{ $trip->created_at }}</td>
 										
 										<td class="table-text">
-											{{ $trip->travelTime }}</td>
+											{{ $trip->travelTime }} </td>
 											
 										<td class="table-text">
-											{{ $trip->co2emissions }}</td>
+											{{ $trip->co2emissions }}KG</td>
 											
 									</tr>
 									

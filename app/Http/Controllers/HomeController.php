@@ -39,17 +39,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        
         $user = Auth::user();
         
-        $trips = $this->trip->getAllTrips(5);
+        $trips = $this->trip->getAllTrips($user, 5);
       
-       $recentLocations = $this->trip->getAllRecentLocations();
+        $recentLocations = $this->trip->getAllRecentLocations($user);
         
-        $totalDistance = $this->trip->totalDistance();
-        $co2sum =  $this->trip->totalCO2();
-        $offset = $this->trip->totalCostToOffsetCO2();
+        $totalDistance = $this->trip->totalDistance($user);
+        $co2sum =  $this->trip->totalCO2($user);
+        $offset = $this->trip->totalCostToOffsetCO2($user);
         
         return view('home.index', [
             'trips' => $trips,

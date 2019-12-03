@@ -74,7 +74,9 @@ body {
   color: #212529;
   text-align: left;
   background-color: #f8fafc;
-  background-image: url('/images/enviro.jpg');
+  background-image: url('http://blog.seagate.com/wp-content/uploads/2015/04/Global-strategy-for-environmental-sustainability.jpg');
+  background-size:cover;
+  /*background-image: url('/images/enviro.jpg');*/
   
 }
 

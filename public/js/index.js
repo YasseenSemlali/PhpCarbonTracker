@@ -114,11 +114,11 @@ function init(){
               if(i>= 2 && j == 3){
                   //add time
                    //  alert(cellVal + "is date");
-                  dates.push(cellVal);
+                  dates.unshift(cellVal)
               }else if(i>= 2 && j == 5){
                     //alert(cellVal + "is Emission");
                   //add co2 emission
-                  emissions.push(cellVal)
+                  emissions.unshift(cellVal)
               }
              
            }

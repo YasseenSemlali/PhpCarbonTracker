@@ -47,13 +47,14 @@
             
             $result['distance'] = $contents['response']['route'][0]['summary']['distance'];
             $result['travelTime'] = $contents['response']['route'][0]['summary']['travelTime'];
-            if(isset( $contents['response']['route'][0]['summary']['co2Emission'])) {
-                $result['co2emissions'] =  $contents['response']['route'][0]['summary']['co2Emission'];
-            } else if ($transportType == 'publicTransport') {
+            
+             $result['co2emissions']=0;
+            if ($transportType == 'publicTransport') {
                  $result['co2emissions']=  $result['distance'] / 1000 * 0.0462;
-            }else {
-                 $result['co2emissions']=0;
             }
+            else if(isset( $contents['response']['route'][0]['summary']['co2Emission'])) {
+                $result['co2emissions'] =  $contents['response']['route'][0]['summary']['co2Emission'];
+            } 
             
             return $result;
         }

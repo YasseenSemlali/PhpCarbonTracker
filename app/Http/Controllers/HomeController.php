@@ -89,17 +89,17 @@ class HomeController extends Controller
         if($request->transportationMode == "car"){
             
             $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode, $user->fuel_type, $user->fuel_consumption);
-            $co2emissions = $tripInfo['co2Emission'];
+            $co2emissions = $tripInfo['co2emissions'];
             $fuelType = $user->fuel_type;
             
             //if the selection is carpool i divide the emission by 2
         }else if($request->transportationMode == "carpool"){
             $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],'car',$user->fuel_type, $user->fuel_consumption);
-            $co2emissions = $tripInfo['co2Emission']/2;
+            $co2emissions = $tripInfo['co2emissions']/2;
             $fuelType = $user->fuel_type;
         }else{
              $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode);
-            $co2emissions = 0.0;
+            $co2emissions = $tripInfo['co2emissions'];
             $fuelType = null;
         }
 

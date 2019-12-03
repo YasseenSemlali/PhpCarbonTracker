@@ -33,7 +33,7 @@ class TripsTableSeeder extends Seeder
              'mode' => 'bicycle',
              'travelTime' => 1320,
              'distance' => 300,
-             'co2emissions' => 2.4,
+             'co2emissions' => 0,
              'user_id' => 1
             ]);
 

@@ -83,12 +83,12 @@
 			
 			<!-- All Trips with pagination-->
 			@if (count($trips) > 0)
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						All trips
+				<div class="panel panel-default" >
+					<div class="panel-heading"  style="background: rgba(122, 130, 136, 0.3)!important;">
+						<h3 class="panel-title">All trips</h3>
 					</div>
 
-					<div class="panel-body">
+					<div class="panel-body" style="background: rgba(200,200,200, 0.5)!important;">
 						<table class="table table-striped task-table" id = "tripTable">
 							<thead>
 								<th>Recent Trips</th>
@@ -112,16 +112,16 @@
 											{{ $trip->engine }}</td>
 											
 								    	<td class="table-text">
-											{{ $trip->distance }} Km</td>
+											{{ $trip->distance/1000  }} Km</td>
 											
 										<td class="table-text">
 											{{ $trip->created_at }}</td>
 										
 										<td class="table-text">
-											{{ $trip->travelTime }}</td>
+											{{ number_format($trip->travelTime / 60, 2) }} minutes</td>
 											
 										<td class="table-text">
-											{{ $trip->co2emissions }}</td>
+											{{ $trip->co2emissions }} KG</td>
 											
 									</tr>
 									

@@ -6,6 +6,8 @@ use App\Repositories\TripRepository;
 use App\Repositories\HereRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 use App\Trip;
 use App\User;
 use App\Locations;
@@ -66,6 +68,11 @@ class HomeController extends Controller
         $user = Auth::user();
         $hereRepo = new HereRepository();
 
+        $request->validate([
+            'start' => 'required',
+            'destination' => 'required',
+            'transportationMode' => 'required',
+        ]);
         
         if($request->start == "Home"){
             $origin['latitude'] = $user->lattitude;
@@ -84,21 +91,45 @@ class HomeController extends Controller
               $destination = $hereRepo->getLatitudeLongitude($request->destination);
         }
         
+         $validator = Validator::make([], []);
+        if(count($origin) == 0) { 
+             $validator->getMessageBag()->add('start', 'Invalid start address');
+             return redirect("/")->withErrors($validator);
+        }
+        if(count($destination) == 0) {
+             $validator->getMessageBag()->add('destination', 'Invalid end address');
+             return redirect("/")->withErrors($validator);
+        }
         
         //if the selection is a car i provide extra arguments
         if($request->transportationMode == "car"){
-            
             $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode, $user->fuel_type, $user->fuel_consumption);
-            $co2emissions = $tripInfo['co2Emission'];
+            
+            if(count($tripInfo) == 0) {
+                $validator->getMessageBag()->add('destination', 'Could not calculate route to destination');
+                return redirect("/")->withErrors($validator);
+            }
+            
+            $co2emissions = $tripInfo['co2emissions'];
             $fuelType = $user->fuel_type;
             
             //if the selection is carpool i divide the emission by 2
         }else if($request->transportationMode == "carpool"){
             $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],'car',$user->fuel_type, $user->fuel_consumption);
-            $co2emissions = $tripInfo['co2Emission']/2;
+            
+            if(count($tripInfo) == 0) {
+                $validator->getMessageBag()->add('destination', 'Could not calculate route to destination');
+                return redirect("/")->withErrors($validator);
+            }
+            $co2emissions = $tripInfo['co2emissions']/2;
             $fuelType = $user->fuel_type;
         }else{
              $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode);
+            
+            if(count($tripInfo) == 0) {
+                $validator->getMessageBag()->add('destination', 'Could not calculate route to destination');
+                return redirect("/")->withErrors($validator);
+            }
             $co2emissions = 0.0;
             $fuelType = null;
         }

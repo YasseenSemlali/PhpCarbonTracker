@@ -66,8 +66,12 @@
                             <label  class="col-md-4 col-form-label text-md-right">Transportation Mode</label>
                             
                             <select name = 'transportationMode'>
-                                <option value="car">Drive</option>
-                                <option value="carpool">CarPool with 2 other people</option>
+                            
+                            	@if($hasCarInfo)
+                               		 <option value="car">Drive</option>
+                                	<option value="carpool">CarPool with 2 other people</option>
+                            	@endif
+                            	
                                 <option value="publicTransport">Take Public Transport</option>
                                 <option value="bicycle">Bike</option>
                                  <option value="pedestrian">Walk</option>
@@ -98,10 +102,10 @@
 								<tr>
 									<th class="table-text"> Transport Mode</th>
 									<th class="table-text">Engine</th>
-									<th class="table-text"> Distance Travelled</th>
+									<th class="table-text"> Distance Travelled in KM</th>
 									<th class="table-text"> Trip Date</th>
-									<th class="table-text">Travel Time  </th>
-									<th class="table-text">CO2 Emitted</th>
+									<th class="table-text">Travel Time in Minutes </th>
+									<th class="table-text">CO2 Emitted in KG</th>
 								</tr>
 								@foreach ($trips as $trip)
 									<tr>
@@ -112,16 +116,16 @@
 											{{ $trip->engine }}</td>
 											
 								    	<td class="table-text">
-											{{ $trip->distance/1000  }} Km</td>
+											{{ $trip->distance/1000  }}</td>
 											
 										<td class="table-text">
 											{{ $trip->created_at }}</td>
 										
 										<td class="table-text">
-											{{ number_format($trip->travelTime / 60, 2) }} minutes</td>
+											{{ number_format($trip->travelTime / 60, 2) }}</td>
 											
 										<td class="table-text">
-											{{ $trip->co2emissions }} KG</td>
+											{{ $trip->co2emissions }}</td>
 											
 									</tr>
 									

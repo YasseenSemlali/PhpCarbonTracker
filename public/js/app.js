@@ -49506,13 +49506,11 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
+// __webpack_require__(/*! /home/ec2-user/environment/resources/js/app.js */"./resources/js/app.js");
+// module.exports = __webpack_require__(/*! /home/ec2-user/environment/resources/sass/app.scss */"./resources/sass/app.scss");
+
 __webpack_require__(/*! /home/ec2-user/environment/team10/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /home/ec2-user/environment/team10/resources/sass/app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! /home/ec2-user/environment/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/ec2-user/environment/resources/sass/app.scss */"./resources/sass/app.scss");
->>>>>>> 38c4e6a415254b84775acf83a8328a756548122a
 
 
 /***/ })

@@ -19,5 +19,12 @@ class LocationsTableSeeder extends Seeder
              'name' => 'Home',
              'user_id' => 1
             ]);
+            
+        Locations::create([
+            'lattitude' =>45.519520,
+             'longtitude' =>  -73.609512,
+             'name' => 'Home',
+             'user_id' => 2
+            ]);
     }
 }

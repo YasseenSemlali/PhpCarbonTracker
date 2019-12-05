@@ -80,7 +80,7 @@
                         
                             <div class="col-md-6">
                                 <select name = 'fuel_type'>
-                                   <option value= "{{ __('none')}}">Not Applicable</option>
+                                   <option value= "none">Not Applicable</option>
                                   <option value="diesel">Diesel</option>
                                   <option value="gasoline">Gasoline</option>
                                   <option value="electric">Electric</option>

@@ -50,15 +50,21 @@ class HomeController extends Controller
         $totalDistance = $this->trip->totalDistance($user);
         $co2sum =  $this->trip->totalCO2($user);
         $offset = $this->trip->totalCostToOffsetCO2($user);
+        $hasCar = true;
+        
+        if(is_null($user->fuel_type) || $user->fuel_type == "none"){
+            $hasCar = false;
+        }
         
         return view('home.index', [
             'trips' => $trips,
             'username' => $user->name,
             'dateStarted' => $user->created_at,
-            'totalDistance' => $totalDistance,
+            'totalDistance' => $totalDistance/1000,
             'emissionAmount' => $co2sum,
             'cost' =>$offset,
-            'locations' =>$recentLocations
+            'locations' =>$recentLocations,
+            'hasCarInfo' =>$hasCar
 
             ]);
     }

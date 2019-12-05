@@ -18,7 +18,14 @@ class CreateTransportTypesTable extends Migration
             $table->timestamps();
             
             $table->string('type', 10);
+            $table->unsignedBigInteger('user_id');
+            
         });
+        
+         Schema::table('transport_types', function($table) {
+       $table->foreign('user_id')->references('id')->on('users');
+          });
+
     }
 
     /**

@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
     {
         
         User::create([
-            'id'=>1,
             'name'=> 'first user',
             'email'=> 'first@email.com',
             'password'=> Hash::make('password'),
@@ -26,7 +25,6 @@ class UsersTableSeeder extends Seeder
             ]);
             
         User::create([
-            'id'=>2,
             'name'=> 'Jane Doe',
             'email'=> 'jd@email.com',
             'password'=> Hash::make('qwerty12'),
@@ -37,7 +35,6 @@ class UsersTableSeeder extends Seeder
             ]);
             
         User::create([
-            'id'=>3,
             'name'=> 'John Doe',
             'email'=> 'doe@email.com',
             'password'=> Hash::make('qwerty34'),

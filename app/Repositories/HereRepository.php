@@ -1,6 +1,5 @@
 <?php
     namespace App\Repositories;
-    //https://developer.here.com/documentation/routing/dev_guide/topics/resource-param-type-vehicle-type.html
     class HereRepository {
         static $app_id = 'Nq8Tkg61stTaV5gAT5jv';
         static $app_code = 'aI_Q8jPEQgQxojt0rJrJiA';
@@ -38,7 +37,7 @@
                 'mode' => 'fastest;'.$transportType.';traffic:'.$traffic,
             );
             
-            if($transportType == 'car') {
+            if($transportType == 'car' || $transportType == 'carpool') {
                 $query_array['vehicletype'] = "$fuelType,$fuelConsumption";
             }
             
@@ -55,6 +54,8 @@
              $result['co2emissions']=0;
             if ($transportType == 'publicTransport') {
                  $result['co2emissions']=  $result['distance'] / 1000 * 0.0462;
+            } else if (isset( $contents['response']['route'][0]['summary']['co2Emission']) && $transportType == 'carpool') {
+                 $result['co2emissions'] =  $contents['response']['route'][0]['summary']['co2Emission'] / 3;
             }
             else if(isset( $contents['response']['route'][0]['summary']['co2Emission'])) {
                 $result['co2emissions'] =  $contents['response']['route'][0]['summary']['co2Emission'];

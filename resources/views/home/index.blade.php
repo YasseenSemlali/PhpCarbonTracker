@@ -40,7 +40,8 @@
 			     
                         <label  class="col-md-4 col-form-label text-md-right">Starting Position</label>
                                    <select name ='start' id="origin">      
-                                   
+                                   	<option value = "home"> Home</option>
+                                   	<option value = "school"> School</option>
                                    	   	@foreach ($locations as $location)
 				     						<option value = "{{$location->name}}"> {{$location->name}}</option>
 				     					@endforeach
@@ -54,6 +55,8 @@
                         <label  class="col-md-4 col-form-label text-md-right">Destination</label>
                          <select name = 'destination' id = "destination">
 
+                                   	<option value = "home"> Home</option>
+                                   	<option value = "school"> School</option>
                                	@foreach ($locations as $location)
 				     				<option value = "{{$location->name}}"> {{$location->name}}</option>
 		  						@endforeach

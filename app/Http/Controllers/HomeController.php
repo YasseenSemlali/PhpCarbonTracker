@@ -16,7 +16,8 @@ use DB;
 class HomeController extends Controller
 {
     protected $trip;
-    
+    private const SCHOOL_LAT = 45.490146;
+    private const SCHOOL_LONG = -73.588221;
 
     /**
      * Create a new controller instance.
@@ -80,20 +81,28 @@ class HomeController extends Controller
             'transportationMode' => 'required',
         ]);
         
-        if($request->start == "Home"){
+        if($request->start == "home"){
             $origin['latitude'] = $user->lattitude;
             $origin['longtitude'] = $user->longtitude;
             
-        }else{
+        } else if($request->start == "school"){
+            $origin['latitude'] = HomeController::SCHOOL_LAT;
+            $origin['longtitude'] = HomeController::SCHOOL_LONG;
+            
+        } else{
               $origin = $hereRepo->getLatitudeLongitude($request->start);
         }
         
-        if($request->destination == "Home"){
+        if($request->destination == "home"){
             
              $destination['latitude'] = $user->lattitude;
              $destination['longtitude'] = $user->longtitude;
              
-        }else{
+        } else if($request->destination == "school"){
+            $destination['latitude'] = HomeController::SCHOOL_LAT;
+            $destination['longtitude'] = HomeController::SCHOOL_LONG;
+            
+        } else{
               $destination = $hereRepo->getLatitudeLongitude($request->destination);
         }
         
@@ -109,6 +118,7 @@ class HomeController extends Controller
         
         //if the selection is a car i provide extra arguments
         if($request->transportationMode == "car"){
+            $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],'car',$user->fuel_type, $user->fuel_consumption);
 
             if(count($tripInfo) == 0) {
                 $validator->getMessageBag()->add('destination', 'Could not calculate route to destination');
@@ -155,19 +165,22 @@ class HomeController extends Controller
 
             ]);
             
-        $request->user()->locations()->create([
-                 'name' => $request->start,
-                 'lattitude' =>$origin['latitude'],
-                 'longtitude' => $origin['longtitude'],
-                
-            ]);
-            
-        $request->user()->locations()->create([
-                 'name' => $request->destination,
-                 'lattitude' =>$destination['latitude'],
-                 'longtitude' => $destination['longtitude'],
-                
-            ]);
+        if($request->start != 'school' && $request->start != 'home') {
+            $request->user()->locations()->create([
+                     'name' => $request->start,
+                     'lattitude' =>$origin['latitude'],
+                     'longtitude' => $origin['longtitude'],
+                    
+                ]);
+        }
+         if($request->destination != 'school' && $request->destination != 'home') {
+            $request->user()->locations()->create([
+                     'name' => $request->destination,
+                     'lattitude' =>$destination['latitude'],
+                     'longtitude' => $destination['longtitude'],
+                    
+                ]);
+         }
             return redirect('/home');
     }
     

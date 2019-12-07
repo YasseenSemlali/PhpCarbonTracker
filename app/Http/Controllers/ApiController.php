@@ -121,13 +121,13 @@ class ApiController extends Controller
     	if (!$user)
     	 return response()->json(['error' => 'invalid_token'], 401);
     	else {
-    	    $fromlatitude = $request->input('fromlatitude');
-    	    $fromlongitude = $request->input('fromlongitude');
-    	    $tolatitude = $request->input('tolatitude');
-    	    $tolongitude = $request->input('tolongitude');
-    	    $mode = $request->input('mode');
-    	    $engine = $request->input('engine');
-    	    $consumption = $request->input('consumption');
+    	    $fromlatitude = $request->query('fromlatitude');
+    	    $fromlongitude = $request->query('fromlongitude');
+    	    $tolatitude = $request->query('tolatitude');
+    	    $tolongitude = $request->query('tolongitude');
+    	    $mode = $request->query('mode');
+    	    $engine = $request->query('engine');
+    	    $consumption = $request->query('consumption');
     	    
     	    if(!isset($fromlatitude)) {
     	        $err[] = 'fromlatitude must be set';
@@ -149,14 +149,19 @@ class ApiController extends Controller
     	        $err[] = 'mode must be set';
     	    }
     	    
+    	    if(!in_array($mode,ApiController::VALID_MODES)) {
+    	        $err[] = 'Invalid transport mode';
+    	    }
+    	    
     	    if($mode == 'car' && !(isset($engine) && isset($consumption))) {
     	        $err[] = 'fuel type and fuel consumption must be set';
-    	        
+    	    } else if($mode == 'car' && !in_array($engine, ApiController::VALID_ENGINES)) {
+    	        $err[] = 'invalid engine type';
     	    }
     	    
     	     if(isset($err)) {
     	        return response()->json([
-    	                'message' => 'The given data was invalid',
+    	                'message' => 'The given data was invalid.',
     	                'errors' => $err
     	            ], 422);
     	    }

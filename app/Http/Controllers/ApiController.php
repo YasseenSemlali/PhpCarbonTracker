@@ -30,6 +30,8 @@ class ApiController extends Controller
     	else {
     		$trips = $this->trip->getAllTrips($user, 1000);	
     		
+    		$allTrips = array();
+    		
     		foreach($trips as $trip) {
     		    $response['id'] = $trip->id;
     		    $response['from']['latitude'] = $trip->start_lattitude;

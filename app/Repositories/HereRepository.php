@@ -19,11 +19,11 @@
             
             return [
                 'latitude' => $latitude,
-                'longtitude' => $longitude,
+                'longitude' => $longitude,
                 ];
         }
         
-        public function getTrip(float $startLatitude, float $startLongitude,float $endLatitude,float $endLongtitude, string $transportType, string $fuelType = null, float $fuelConsumption = null) {
+        public function getTrip(float $startLatitude, float $startLongitude,float $endLatitude,float $endlongitude, string $transportType, string $fuelType = null, float $fuelConsumption = null) {
             
             $traffic = 'enabled';
             
@@ -40,7 +40,7 @@
                 'app_code' => self::$app_code,
                 'app_id' => self::$app_id,
                 'waypoint0' =>  'geo!'.$startLatitude.','.$startLongitude,
-                'waypoint1' => 'geo!'.$endLatitude.','.$endLongtitude,
+                'waypoint1' => 'geo!'.$endLatitude.','.$endlongitude,
                 'mode' => $mode,
             );
             

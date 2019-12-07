@@ -82,12 +82,12 @@ class HomeController extends Controller
         ]);
         
         if($request->start == "home"){
-            $origin['latitude'] = $user->lattitude;
-            $origin['longtitude'] = $user->longtitude;
+            $origin['latitude'] = $user->latitude;
+            $origin['longitude'] = $user->longitude;
             
         } else if($request->start == "school"){
             $origin['latitude'] = HomeController::SCHOOL_LAT;
-            $origin['longtitude'] = HomeController::SCHOOL_LONG;
+            $origin['longitude'] = HomeController::SCHOOL_LONG;
             
         } else{
               $origin = $hereRepo->getLatitudeLongitude($request->start);
@@ -95,12 +95,12 @@ class HomeController extends Controller
         
         if($request->destination == "home"){
             
-             $destination['latitude'] = $user->lattitude;
-             $destination['longtitude'] = $user->longtitude;
+             $destination['latitude'] = $user->latitude;
+             $destination['longitude'] = $user->longitude;
              
         } else if($request->destination == "school"){
             $destination['latitude'] = HomeController::SCHOOL_LAT;
-            $destination['longtitude'] = HomeController::SCHOOL_LONG;
+            $destination['longitude'] = HomeController::SCHOOL_LONG;
             
         } else{
               $destination = $hereRepo->getLatitudeLongitude($request->destination);
@@ -118,7 +118,7 @@ class HomeController extends Controller
         
         //if the selection is a car i provide extra arguments
         if($request->transportationMode == "car"){
-            $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],'car',$user->fuel_type, $user->fuel_consumption);
+            $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longitude'],$destination['latitude'],$destination['longitude'],'car',$user->fuel_type, $user->fuel_consumption);
 
             if(count($tripInfo) == 0) {
                 $validator->getMessageBag()->add('destination', 'Could not calculate route to destination');
@@ -130,7 +130,7 @@ class HomeController extends Controller
             
             //if the selection is carpool i divide the emission by 2
         }else if($request->transportationMode == "carpool"){
-            $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],'car',$user->fuel_type, $user->fuel_consumption);
+            $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longitude'],$destination['latitude'],$destination['longitude'],'car',$user->fuel_type, $user->fuel_consumption);
 
             
             if(count($tripInfo) == 0) {
@@ -140,7 +140,7 @@ class HomeController extends Controller
             $co2emissions = $tripInfo['co2emissions']/2;
             $fuelType = $user->fuel_type;
         }else{
-             $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longtitude'],$destination['latitude'],$destination['longtitude'],$request->transportationMode);
+             $tripInfo = $hereRepo->getTrip($origin['latitude'],$origin['longitude'],$destination['latitude'],$destination['longitude'],$request->transportationMode);
 
             if(count($tripInfo) == 0) {
                 $validator->getMessageBag()->add('destination', 'Could not calculate route to destination');
@@ -153,10 +153,10 @@ class HomeController extends Controller
 
 
         $request->user()->trips()->create([
-                 'start_lattitude' =>$origin['latitude'],
-                     'start_longtitude' => $origin['longtitude'],
-                     'end_lattitude' => $destination['latitude'],
-                     'end_longtitude' => $destination['longtitude'],
+                 'start_latitude' =>$origin['latitude'],
+                     'start_longitude' => $origin['longitude'],
+                     'end_latitude' => $destination['latitude'],
+                     'end_longitude' => $destination['longitude'],
                     'mode' =>$request->transportationMode,
                     'engine' => $fuelType,
                     'travelTime' =>$tripInfo['travelTime'],
@@ -168,16 +168,16 @@ class HomeController extends Controller
         if($request->start != 'school' && $request->start != 'home') {
             $request->user()->locations()->create([
                      'name' => $request->start,
-                     'lattitude' =>$origin['latitude'],
-                     'longtitude' => $origin['longtitude'],
+                     'latitude' =>$origin['latitude'],
+                     'longitude' => $origin['longitude'],
                     
                 ]);
         }
          if($request->destination != 'school' && $request->destination != 'home') {
             $request->user()->locations()->create([
                      'name' => $request->destination,
-                     'lattitude' =>$destination['latitude'],
-                     'longtitude' => $destination['longtitude'],
+                     'latitude' =>$destination['latitude'],
+                     'longitude' => $destination['longitude'],
                     
                 ]);
          }

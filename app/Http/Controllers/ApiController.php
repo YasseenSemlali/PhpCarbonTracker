@@ -14,7 +14,7 @@ class ApiController extends Controller
     private $trip;
     private $here;
     
-    private const VALID_MODES=['car','carpool','publicTransit','bicycle','pedestrian'];
+    private const VALID_MODES=['car','carpool','publicTransport','bicycle','pedestrian'];
         
     public function __construct(TripRepository $trip, HereRepository $here) {
         $this->trip = $trip;

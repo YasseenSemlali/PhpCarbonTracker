@@ -13,6 +13,8 @@ class ApiController extends Controller
 {
     private $trip;
     private $here;
+    
+    private const VALID_MODES=['car','carpool','publicTransit','bicycle','pedestrian'];
         
     public function __construct(TripRepository $trip, HereRepository $here) {
         $this->trip = $trip;
@@ -21,6 +23,7 @@ class ApiController extends Controller
     
     public function alltrips(Request $request) {
         $user = auth('api')->user(); //returns null if not valid
+        
     	if (!$user)
     	 return response()->json(['error' => 'invalid_token'], 401);
     	else {
@@ -77,9 +80,13 @@ class ApiController extends Controller
     	        $err[] = 'mode must be set';
     	    }
     	    
+    	    if(!in_array($mode,ApiController::VALID_MODES)) {
+    	        $err[] = 'Invalid transport mode';
+    	    }
+    	    
+    	    
     	    if($mode == 'car' && !(isset($engine) && isset($consumption))) {
     	        $err[] = 'fuel type and fuel consumption must be set';
-    	        
     	    }
     	    
     	     if(isset($err)) {

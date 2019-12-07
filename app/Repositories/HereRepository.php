@@ -1,6 +1,5 @@
 <?php
     namespace App\Repositories;
-    //https://developer.here.com/documentation/routing/dev_guide/topics/resource-param-type-vehicle-type.html
     class HereRepository {
         static $app_id = 'Nq8Tkg61stTaV5gAT5jv';
         static $app_code = 'aI_Q8jPEQgQxojt0rJrJiA';

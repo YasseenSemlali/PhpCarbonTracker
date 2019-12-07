@@ -25,16 +25,23 @@
         
         public function getTrip(float $startLatitude, float $startLongitude,float $endLatitude,float $endLongtitude, string $transportType, string $fuelType = null, float $fuelConsumption = null) {
             
-            $mode='fastest';
             $traffic = 'enabled';
             
             $baseUrl = 'https://route.api.here.com/routing/7.2/calculateroute.json';
+            
+            if($transportType == 'carpool') {
+                $mode='fastest;car;traffic:'.$traffic;
+            } else {
+                $mode='fastest;'.$transportType.';traffic:'.$traffic;
+            }
+            
+            
             $query_array = array (
                 'app_code' => self::$app_code,
                 'app_id' => self::$app_id,
                 'waypoint0' =>  'geo!'.$startLatitude.','.$startLongitude,
                 'waypoint1' => 'geo!'.$endLatitude.','.$endLongtitude,
-                'mode' => 'fastest;'.$transportType.';traffic:'.$traffic,
+                'mode' => $mode,
             );
             
             if($transportType == 'car' || $transportType == 'carpool') {

@@ -14,7 +14,8 @@ class ApiController extends Controller
     private $trip;
     private $here;
     
-    private const VALID_MODES=['car','carpool','publicTransit','bicycle','pedestrian'];
+    private const VALID_MODES=['car','carpool','publicTransport','bicycle','pedestrian'];
+    private const VALID_ENGINES=['gasoline','diesel','electric'];
         
     public function __construct(TripRepository $trip, HereRepository $here) {
         $this->trip = $trip;
@@ -28,6 +29,8 @@ class ApiController extends Controller
     	 return response()->json(['error' => 'invalid_token'], 401);
     	else {
     		$trips = $this->trip->getAllTrips($user, 1000);	
+    		
+    		$allTrips = array();
     		
     		foreach($trips as $trip) {
     		    $response['id'] = $trip->id;
@@ -84,19 +87,26 @@ class ApiController extends Controller
     	        $err[] = 'Invalid transport mode';
     	    }
     	    
-    	    
     	    if($mode == 'car' && !(isset($engine) && isset($consumption))) {
     	        $err[] = 'fuel type and fuel consumption must be set';
+    	    } else if($mode == 'car' && !in_array($engine, ApiController::VALID_ENGINES)) {
+    	        $err[] = 'invalid engine type';
     	    }
     	    
     	     if(isset($err)) {
     	        return response()->json([
-    	                'message' => 'The given data was invalid',
+    	                'message' => 'The given data was invalid.',
     	                'errors' => $err
     	            ], 422);
     	    }
     	    
     	    $trip = $this->here->getTrip($fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$engine, $consumption );
+    	    
+    	    if(empty($trip)) {
+    	        return response()->json([
+    	                'error' => 'ApplicationError',
+    	            ], 422);
+    	    }
     	    
     		$response['distance'] = $trip['distance'];
     		$response['traveltime'] = $trip['travelTime'];
@@ -139,20 +149,30 @@ class ApiController extends Controller
     	        $err[] = 'mode must be set';
     	    }
     	    
+    	    if(!in_array($mode,ApiController::VALID_MODES)) {
+    	        $err[] = 'Invalid transport mode';
+    	    }
+    	    
     	    if($mode == 'car' && !(isset($engine) && isset($consumption))) {
     	        $err[] = 'fuel type and fuel consumption must be set';
-    	        
+    	    } else if($mode == 'car' && !in_array($engine, ApiController::VALID_ENGINES)) {
+    	        $err[] = 'invalid engine type';
     	    }
     	    
     	     if(isset($err)) {
     	        return response()->json([
-    	                'message' => 'The given data was invalid',
+    	                'message' => 'The given data was invalid.',
     	                'errors' => $err
     	            ], 422);
     	    }
     	    
     	    $trip = $this->trip->addTrip($user, $fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$engine, $consumption );
     	    
+    	    if(empty($trip)) {
+    	        return response()->json([
+    	                'error' => 'ApplicationError',
+    	            ], 422);
+    	    }
     	   
     		$response['id'] = $trip->id;
     		$response['from']['latitude'] = $trip->start_lattitude;
@@ -160,11 +180,11 @@ class ApiController extends Controller
     		$response['to']['latitude'] = $trip->end_lattitude;
     		$response['to']['longtitude'] = $trip->end_longtitude;
     		$response['mode'] = $trip->mode;
-    		$response['created_at'] = $trip->created_at;
     		
     		$response['distance'] = $trip->distance;
     		$response['traveltime'] = $trip->travelTime;
     		$response['co2emissions'] = $trip->co2emissions;
+    		$response['created_at'] = $trip->created_at;
     		    
     		    
     		return response()->json($response);

@@ -23,6 +23,10 @@ use App\Repositories\HereRepository;
         public function addTrip(User $user, float $fromLatitude, float $fromLongtude, float $toLatitude, float $toLongtude, string $transportType, string $fuelType = null, float $fuelConsumption = null) {
             $tripInfo = $this->here->getTrip($fromLatitude, $fromLongtude, $toLatitude, $toLongtude, $transportType, $fuelType, $fuelConsumption);
             
+            if(empty($tripInfo)) {
+                return [];
+            }
+            
             $trip = new Trip;
             
             $trip -> start_lattitude = $fromLatitude;

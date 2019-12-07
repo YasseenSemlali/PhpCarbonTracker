@@ -15,6 +15,7 @@ class ApiController extends Controller
     private $here;
     
     private const VALID_MODES=['car','carpool','publicTransport','bicycle','pedestrian'];
+    private const VALID_ENGINES=['gasoline','diesel','electric'];
         
     public function __construct(TripRepository $trip, HereRepository $here) {
         $this->trip = $trip;
@@ -84,14 +85,15 @@ class ApiController extends Controller
     	        $err[] = 'Invalid transport mode';
     	    }
     	    
-    	    
     	    if($mode == 'car' && !(isset($engine) && isset($consumption))) {
     	        $err[] = 'fuel type and fuel consumption must be set';
+    	    } else if($mode == 'car' && !in_array($engine, ApiController::VALID_ENGINES)) {
+    	        $err[] = 'invalid engine type';
     	    }
     	    
     	     if(isset($err)) {
     	        return response()->json([
-    	                'message' => 'The given data was invalid',
+    	                'message' => 'The given data was invalid.',
     	                'errors' => $err
     	            ], 422);
     	    }
@@ -100,7 +102,7 @@ class ApiController extends Controller
     	    
     	    if(empty($trip)) {
     	        return response()->json([
-    	                'error' => 'application error',
+    	                'error' => 'ApplicationError',
     	            ], 422);
     	    }
     	    

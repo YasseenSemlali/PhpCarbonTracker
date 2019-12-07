@@ -22,10 +22,10 @@ class CreateTripsTable extends Migration
               ->references('id')->on('users')
               ->onDelete('cascade');
             
-            $table->double('start_lattitude', 9,6);
-            $table->double('start_longtitude', 9,6);
-            $table->double('end_lattitude', 9,6);
-            $table->double('end_longtitude', 9,6);
+            $table->double('start_latitude', 9,6);
+            $table->double('start_longitude', 9,6);
+            $table->double('end_latitude', 9,6);
+            $table->double('end_longitude', 9,6);
             
             $table->enum('mode', ['car', 'publicTransport', 'bicycle','pedestrian','carpool'])->nullable();
             $table->enum('engine', ['diesel', 'gasoline', 'electric'])->nullable();

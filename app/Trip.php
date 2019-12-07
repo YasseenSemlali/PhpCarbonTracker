@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Trip extends Model
 {
-    protected $fillable = ['start_lattitude', 'start_longtitude', 'end_lattitude', 'end_longtitude', 
+    protected $fillable = ['start_latitude', 'start_longitude', 'end_latitude', 'end_longitude', 
     'mode', 'engine', 'travelTime', 'distance', 'co2emissions',];
     
     /**

@@ -1,10 +1,10 @@
 # team10
 http://yasseen.herokuapp.com/
 Users:
+    (seeded)
     email: first@email.com 
     password: password
     
-    (seeded)
     email: jd@email.com 
     password: qwerty12
     

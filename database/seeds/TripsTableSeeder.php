@@ -14,10 +14,10 @@ class TripsTableSeeder extends Seeder
     {
 
         Trip::create([
-            'start_lattitude' => 75,
-             'start_longtitude' => -97,
-             'end_lattitude' => 76,
-             'end_longtitude' => -96,
+            'start_latitude' => 75,
+             'start_longitude' => -97,
+             'end_latitude' => 76,
+             'end_longitude' => -96,
               'mode' => 'car',
              'engine' => 'diesel',
              'travelTime' => 130,
@@ -26,10 +26,10 @@ class TripsTableSeeder extends Seeder
              'user_id' => 1
             ]);
         Trip::create([
-            'start_lattitude' => 65,
-             'start_longtitude' => -56,
-             'end_lattitude' => 54,
-             'end_longtitude' => -34,
+            'start_latitude' => 65,
+             'start_longitude' => -56,
+             'end_latitude' => 54,
+             'end_longitude' => -34,
              'mode' => 'bicycle',
              'travelTime' => 1320,
              'distance' => 300,

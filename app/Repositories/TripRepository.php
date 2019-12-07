@@ -29,10 +29,10 @@ use App\Repositories\HereRepository;
             
             $trip = new Trip;
             
-            $trip -> start_lattitude = $fromLatitude;
-            $trip -> start_longtitude = $fromLongtude;
-            $trip -> end_lattitude = $toLatitude;
-            $trip -> end_longtitude = $toLongtude;
+            $trip -> start_latitude = $fromLatitude;
+            $trip -> start_longitude = $fromLongtude;
+            $trip -> end_latitude = $toLatitude;
+            $trip -> end_longitude = $toLongtude;
             $trip -> mode = $transportType;
             $trip -> engine = $fuelType;
             $trip -> travelTime = $tripInfo['travelTime'];

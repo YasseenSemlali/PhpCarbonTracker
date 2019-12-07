@@ -41,7 +41,7 @@
                 'app_id' => self::$app_id,
                 'waypoint0' =>  'geo!'.$startLatitude.','.$startLongitude,
                 'waypoint1' => 'geo!'.$endLatitude.','.$endLongtitude,
-                'mode' => 'fastest;'.$transportType.';traffic:'.$traffic,
+                'mode' => $mode,
             );
             
             if($transportType == 'car' || $transportType == 'carpool') {

@@ -98,6 +98,12 @@ class ApiController extends Controller
     	    
     	    $trip = $this->here->getTrip($fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$engine, $consumption );
     	    
+    	    if(empty($trip)) {
+    	        return response()->json([
+    	                'error' => 'application error',
+    	            ], 422);
+    	    }
+    	    
     		$response['distance'] = $trip['distance'];
     		$response['traveltime'] = $trip['travelTime'];
     		$response['co2emissions'] = $trip['co2emissions'];

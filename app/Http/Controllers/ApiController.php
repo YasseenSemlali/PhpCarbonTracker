@@ -168,6 +168,11 @@ class ApiController extends Controller
     	    
     	    $trip = $this->trip->addTrip($user, $fromlatitude, $fromlongitude,$tolatitude ,$tolongitude ,$mode ,$engine, $consumption );
     	    
+    	    if(empty($trip)) {
+    	        return response()->json([
+    	                'error' => 'ApplicationError',
+    	            ], 422);
+    	    }
     	   
     		$response['id'] = $trip->id;
     		$response['from']['latitude'] = $trip->start_lattitude;
@@ -175,11 +180,11 @@ class ApiController extends Controller
     		$response['to']['latitude'] = $trip->end_lattitude;
     		$response['to']['longtitude'] = $trip->end_longtitude;
     		$response['mode'] = $trip->mode;
-    		$response['created_at'] = $trip->created_at;
     		
     		$response['distance'] = $trip->distance;
     		$response['traveltime'] = $trip->travelTime;
     		$response['co2emissions'] = $trip->co2emissions;
+    		$response['created_at'] = $trip->created_at;
     		    
     		    
     		return response()->json($response);

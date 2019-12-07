@@ -35,9 +35,9 @@ class ApiController extends Controller
     		foreach($trips as $trip) {
     		    $response['id'] = $trip->id;
     		    $response['from']['latitude'] = $trip->start_lattitude;
-    		    $response['from']['longtitude'] = $trip->start_longtitude;
+    		    $response['from']['longitude'] = $trip->start_longtitude;
     		    $response['to']['latitude'] = $trip->end_lattitude;
-    		    $response['to']['longtitude'] = $trip->end_longtitude;
+    		    $response['to']['longitude'] = $trip->end_longtitude;
     		    $response['mode'] = $trip->mode;
     		    $response['distance'] = $trip->distance;
     		    $response['traveltime'] = $trip->travelTime;
@@ -176,9 +176,9 @@ class ApiController extends Controller
     	   
     		$response['id'] = $trip->id;
     		$response['from']['latitude'] = $trip->start_lattitude;
-    		$response['from']['longtitude'] = $trip->start_longtitude;
+    		$response['from']['longitude'] = $trip->start_longtitude;
     		$response['to']['latitude'] = $trip->end_lattitude;
-    		$response['to']['longtitude'] = $trip->end_longtitude;
+    		$response['to']['longitude'] = $trip->end_longtitude;
     		$response['mode'] = $trip->mode;
     		
     		$response['distance'] = $trip->distance;

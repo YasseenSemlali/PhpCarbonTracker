@@ -115,11 +115,11 @@ class HomeController extends Controller
          $validator = Validator::make([], []);
         if(count($origin) == 0) { 
              $validator->getMessageBag()->add('start', 'Invalid start address');
-             return redirect("/")->withErrors($validator);
+             return redirect("/home")->withErrors($validator);
         }
         if(count($destination) == 0) {
              $validator->getMessageBag()->add('destination', 'Invalid end address');
-             return redirect("/")->withErrors($validator);
+             return redirect("/home")->withErrors($validator);
         }
         
         //if the selection is a car i provide extra arguments
@@ -128,7 +128,7 @@ class HomeController extends Controller
 
             if(count($tripInfo) == 0) {
                 $validator->getMessageBag()->add('destination', 'Could not calculate route to destination');
-                return redirect("/")->withErrors($validator);
+                return redirect("/home")->withErrors($validator);
             }
             
             $co2emissions = $tripInfo['co2emissions'];
@@ -141,7 +141,7 @@ class HomeController extends Controller
             
             if(count($tripInfo) == 0) {
                 $validator->getMessageBag()->add('destination', 'Could not calculate route to destination');
-                return redirect("/")->withErrors($validator);
+                return redirect("/home")->withErrors($validator);
             }
             $co2emissions = $tripInfo['co2emissions']/2;
             $fuelType = $user->fuel_type;
@@ -150,7 +150,7 @@ class HomeController extends Controller
 
             if(count($tripInfo) == 0) {
                 $validator->getMessageBag()->add('destination', 'Could not calculate route to destination');
-                return redirect("/")->withErrors($validator);
+                return redirect("/home")->withErrors($validator);
             }
             $co2emissions = $tripInfo['co2emissions'];
             $fuelType = null;

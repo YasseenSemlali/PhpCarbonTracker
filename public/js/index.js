@@ -19,6 +19,9 @@ function init(){
         }
     }
     
+    /**
+     * This function is used check if the user want's to enter addresses manually
+     * */
     function handleDestination(){
         if(destination.value == "other"){
             createDestiantionInput();
@@ -28,7 +31,10 @@ function init(){
         }
     }
     
-    
+    /**
+     * This function is used to crate a strating point input label,
+     * textbox. 
+     * **/
     function createOriginInput(){
         
         var parentDiv = document.getElementById('fillOrigin');
@@ -46,7 +52,10 @@ function init(){
 
         
     }
-     
+    
+    /**
+     * This function creates a dynamic input elements used to enter addresses
+     * **/
     function createDestiantionInput(){
         
         var parentDiv = document.getElementById('fillDest');
@@ -64,12 +73,19 @@ function init(){
         
     }
     
+    /**
+     * This function is used to clear a div by deleting all it's nodes
+     * */
     function removeAllnode(parent){
           while(parent.hasChildNodes()){
             parent.removeChild(parent.lastChild);
         }
     }
     
+    /**
+     * This function uses a library to draw a chart describing co2 emissions and dates
+     * 
+     */
     function drawChart(){
     getTableData();
 
@@ -89,6 +105,9 @@ function init(){
         });
     }
     
+    /**
+     * This function is used all the data from the trips table
+     * */
    function getTableData(){ 
     var oTable = document.getElementById('tripTable');
 

@@ -13,16 +13,14 @@
 URL::forceScheme('https');
 
 
-Route::get('/', function () {
+ Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
-// Route::get('/','HomeController@home');
 Route::get('/home', 'HomeController@home');
  Route::get('/home', 'HomeController@index');
-//Route::get('/', 'HomeController@index');
 Route::post('/home','HomeController@index')->middleware('auth');
 
 Route::post('/home','HomeController@addTrip')->middleware('auth');

@@ -19,8 +19,8 @@
 				     <label  class="">Welcome <strong>{{$username}}</strong></label></br>
 				     <label  class="">Date Started <strong>{{$dateStarted}}</strong></label></br>
 				     <label  class="">Total Distance In Commute <strong>{{$totalDistance}} Km</strong></label></br>
-				     <label  class="">Amount of CO2 emissions <strong>{{$emissionAmount}}</strong></label></br>
-				     <label  class="">Cost To Offset your Emission <strong>{{$cost}}</strong></label></br>
+				     <label  class="">Amount of CO2 emissions <strong>{{$emissionAmount}} g</strong></label></br>
+				     <label  class="">Cost To Offset your Emission <strong>{{$cost}} $</strong></label></br>
 				     
 					<div class="panel-heading">
 					 	<h4>Plan A Trip</h4>

@@ -71,6 +71,11 @@ class HomeController extends Controller
     }
     
     
+    /**
+     * This method is called with a post request to add a trip to the database
+     *
+     * param request 
+     */
     public function addTrip(Request $request){
         $user = Auth::user();
         $hereRepo = new HereRepository();
@@ -81,6 +86,7 @@ class HomeController extends Controller
             'transportationMode' => 'required',
         ]);
         
+        //if the selected starting point is home or school we fetch coordinates from the database
         if($request->start == "home"){
             $origin['latitude'] = $user->latitude;
             $origin['longitude'] = $user->longitude;
@@ -151,7 +157,9 @@ class HomeController extends Controller
         }
 
 
-
+        /**
+         * Adding a trip to the database
+         * */
         $request->user()->trips()->create([
                  'start_latitude' =>$origin['latitude'],
                      'start_longitude' => $origin['longitude'],

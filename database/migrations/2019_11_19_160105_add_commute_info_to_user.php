@@ -28,8 +28,9 @@ class AddCommuteInfoToUser extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-             $table->dropColumn(['latitude', 'longitude', 'fuel_type', 'fuel_consumption']);
-        });
+         Schema::dropIfExists('users');
+        // Schema::table('users', function (Blueprint $table) {
+        //      $table->dropColumn(['latitude', 'longitude', 'fuel_type', 'fuel_consumption']);
+        // });
     }
 }

@@ -22,9 +22,10 @@ class TripsTableSeeder extends Seeder
              'engine' => 'diesel',
              'travelTime' => 130,
              'distance' => 123,
-             'co2emissions' => 19,
+             'co2emissions' => 5.8,
              'user_id' => 1
             ]);
+            
         Trip::create([
             'start_latitude' => 65,
              'start_longitude' => -56,
